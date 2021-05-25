@@ -1,7 +1,8 @@
-import { getForumList, getCommentList, insertFroumPost, insertCommentPost } from "../models/postModel.js";
+import { getForumList, getCommentList, insertForumPost, insertCommentPost } from "../models/postModel.js";
  
 // Get forum post
 export const showForumPost = (req, res) => {
+    console.log('got request')
     getForumList((err, results) => {
         if (err){
             res.send(err);
@@ -25,7 +26,7 @@ export const showCommentPost = (req, res) => {
 // Create new forum post
 export const createForumPost = (req, res) => {
     const data = req.body;
-    insertFroumPost(data, (err, results) => {
+    insertForumPost(data, (err, results) => {
         if (err){
             res.send(err);
         }else{
