@@ -26,6 +26,7 @@ export const showCommentPost = (req, res) => {
 // Create new forum post
 export const createForumPost = (req, res) => {
     const data = req.body;
+    console.log('got new post request')
     insertForumPost(data, (err, results) => {
         if (err){
             res.send(err);
@@ -34,6 +35,7 @@ export const createForumPost = (req, res) => {
         }
     });
 }
+
 // Create new comment post
 export const createCommentPost = (req, res) => {
     const data = req.body;

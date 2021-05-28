@@ -18,7 +18,7 @@ router.get('/comment/:id', showCommentPost);
 router.post('/forumPost', createForumPost);
 
 // Create New Comment Post
-router.post('/commentPost', createCommentPost);
+router.post('/commentPost/', createCommentPost);
  
  
 // export default router

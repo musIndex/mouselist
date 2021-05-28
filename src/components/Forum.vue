@@ -9,7 +9,7 @@
           @click="openNew"
         />
         <h4>
-          Users can post on a listing in 'Comments.' Contact
+          Users can add a 'New Post' and 'Post Comment' on a post. Contact
           <a href="mailto:admin.mousedatabase@ucsf.edu">administrator</a> to
           update a Mouselist post.
         </h4>
@@ -103,13 +103,12 @@
             :to="{
               name: 'Comment',
               params: { mouse: slotProps.data.mouse, id: slotProps.data.id },
-            }"
-          >
+            }">
             <Button
               icon="pi pi-pencil"
               class="p-button-rounded p-button-success p-mr-2"
-              @click="editComment(slotProps.data.mouse, slotProps.data.id)"
-            />
+              >Edit
+            </Button>
           </router-link>
         </template>
       </Column>
@@ -188,7 +187,7 @@
     <div class="p-field">
       <label for="needed">Date Needed</label>
       <Calendar
-        v-model="forumPost.dateNeeded"
+        v-model="forumPost.needed"
         dateFormat="mm-dd-yy"
         id="date"
         placeholder="Date needed or none"
@@ -309,13 +308,12 @@ export default {
     const savePosting = async () => {
       submitted.value = true;
       if (forumPost.value.email.trim()) {
-        //forumPost.value.id = createId();
-        forumPost.value.posted = fixedDate;
-        //forumPost.value.needed = forumPost.value.needed.toDateString();
+        forumPost.value.needed = forumPost.value.needed.toDateString();
         console.log(forumPost.value.needed);
         forumPost.value.actions = forumPost.value.actions.value
           ? forumPost.value.actions.value
           : forumPost.value.actions;
+        forumPost.value.posted = fixedDate;
         //forum.value.push(forumPost.value);
         try {
           await axios.post("http://localhost:5000/forumPost", forumPost.value);
@@ -323,7 +321,7 @@ export default {
         } catch (error) {
           console.log(error);
         }
-
+        forum.value.push(forumPost.value);
         toast.add({
           severity: "success",
           summary: "Successful",

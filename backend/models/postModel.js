@@ -36,24 +36,41 @@ export const getCommentList = async (id, result) => {
 }
 
 // Insert forum post into database
-export const insertForumPost = (data, result) => {
-    pool.query('INSERT INTO forum SET ?', [data], (err, results) => {
-        if (err) {
-            console.log(err);
-            result(err, null);
-        } else {
-            result(null, results);
+export const insertForumPost = async (data, result) => {
+    try {
+        let dataProps = []
+        for (const prop in data) {
+            dataProps.push(`${prop} = '${data[prop]}'`);
         }
-    });
+        
+        const query = `INSERT INTO forum SET ${dataProps.join(',')}`
+        console.log(query);
+        const queryResults = await pool.query(query);
+        console.log(data);
+        result(null, queryResults);
+        console.log(queryResults);
+    }
+    catch (error){
+        console.log(error);
+        result(error, null);
+    }
 }
+
+    
 //Insert comment post into database
-export const insertCommentPost = (data, result) => {
-    pool.query("INSERT INTO comment SET ?", [data], (err, results) => {
-        if (err) {
-            console.log(err);
-            result(err, null);
-        } else {
-            result(null, results);
+export const insertCommentPost = async (data, result) => {
+    try {
+        let dataProps = []
+        for (const prop in data) {
+            dataProps.push(`${prop} = '${data[prop]}'`);
         }
-    });
+        
+        const query = `INSERT INTO comment SET ${dataProps.join(',')}`
+        console.log(query);
+        result(null, queryResults);
+    }
+    catch (error){
+        console.log(error);
+        result(error, null);
+    }   
 }
