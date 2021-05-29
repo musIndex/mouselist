@@ -1,4 +1,5 @@
 <template>
+<router-view />
   <div class="card">
     <Toolbar class="p-mb-4">
       <template #left>
@@ -98,11 +99,12 @@
         </template>
       </Column>
       <Column header="Post Comment">
-        <template #body="slotProps">
+        <template #body="slotProps" >
           <router-link
             :to="{
               name: 'Comment',
-              params: { mouse: slotProps.data.mouse, id: slotProps.data.id },
+              params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
+              
             }">
             <Button
               icon="pi pi-pencil"
@@ -236,7 +238,9 @@ import "primeflex/primeflex.css";
 import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
 
+
 export default {
+    
   created() {
     let today = new Date();
     let month = today.getMonth();
@@ -268,6 +272,7 @@ export default {
         console.log("error");
       }
     });
+    
     const router = useRouter();
     const loading = ref(true);
     const forum = ref();

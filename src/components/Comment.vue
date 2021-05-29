@@ -1,5 +1,5 @@
 <template>
-<router-view/>
+
   <Dialog
     v-model:visible="commentDialog"
     :style="{ width: '450px' }"
@@ -7,9 +7,10 @@
     :modal="true"
     class="p-fluid"
   >
-    <div class="p-field">
-      <label for="mouse">Mouse Name</label>
-      <InputText id="mouse" v-bind:mouse="forumComment.mouse" />
+    <div id='mouse' class="p-field"  >
+      <h4>Mouse Name: {{mouse}} </h4>
+      <h4>{{id}}</h4>
+      
     </div>
     <div class="p-field">
       <label for="email">Email</label>
@@ -93,6 +94,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 
 export default {
+  props: ['mouse'], 
   setup() {
     
     const forumComment = ref({});
@@ -129,7 +131,8 @@ export default {
       submitted.value = true;
       if (forumComment.value.email.trim()) {
         forumComment.value.posted = fixedDate;
-        //comment.value.push(forumComment.value);
+        //forumComment.value.mouseID = id;
+
         axios.post("http://localhost:5000/commentPost", forumComment.value).then(
           (response) => {
             router.push("/");

@@ -6,14 +6,18 @@ const routes = [
     {
       name: 'Forum',
       path: '/',
-      component: Forum
-    },
-    {
-      name: 'Comment',
-      path: '/comment/:id',
-      component: Comment
-    },
-  ];
+      component: Forum,
+      props: true,
+        children: [
+          {
+            path: 'comment/:id',
+              name: 'Comment',
+              component: Comment,
+              props: true
+          }
+        ]
+      }
+  ]
 
   const router = createRouter({
     history: createWebHistory(),
