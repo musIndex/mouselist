@@ -12,7 +12,7 @@
         <h4>
           Users can add a 'New Post' and 'Post Comment' on a post. Contact
           <a href="mailto:admin.mousedatabase@ucsf.edu">administrator</a> to
-          update a Mouselist post.
+          edit a Mouselist post.
         </h4>
       </template>
     </Toolbar>

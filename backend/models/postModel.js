@@ -67,7 +67,11 @@ export const insertCommentPost = async (data, result) => {
         
         const query = `INSERT INTO comment SET ${dataProps.join(',')}`
         console.log(query);
+        
+        const queryResults = await pool.query(query);
+        
         result(null, queryResults);
+       // console.log(queryResults);
     }
     catch (error){
         console.log(error);

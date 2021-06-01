@@ -3,31 +3,29 @@
   <Dialog
     v-model:visible="commentDialog"
     :style="{ width: '450px' }"
-    header="Post Comment for"
+    header="Post Comment"
     :modal="true"
     class="p-fluid"
   >
     <div id='mouse' class="p-field"  >
-      <h4>Mouse Name: {{mouse}} </h4>
-      <h4>{{id}}</h4>
-      
+      <h4>Mouse Name: {{mouse}}</h4>
     </div>
     <div class="p-field">
-      <label for="email">Email</label>
+      <label for="email">Your Email</label>
       <InputText
         id="email"
         v-model.trim="forumComment.email"
         required="true"
         autofocus
-        :class="{ 'p-invalid': submitted && !forum.email }"
+        :class="{ 'p-invalid': submitted && !forumComment.email }"
       />
       <small class="p-error" v-if="submitted && !forumComment.email"
         >Email is required.</small
       >
     </div>
     <div class="p-field">
-      <label for="comments">Comment</label>
-      <InputText id="comments" v-model.trim="forumComment.comments" />
+      <label for="comment">Comment</label>
+      <InputText id="comment" v-model.trim="forumComment.user_comment" />
     </div>
     <template #footer>
       <Button
@@ -60,7 +58,7 @@
       responsiveLayout="scroll"
     >
       <Column
-        field="posted"
+        field="posted_date"
         header="Posted on"
         sortable
         style="width: 50%"
@@ -92,11 +90,12 @@ import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
 import axios from "axios";
 import { useRouter } from "vue-router";
+import { useRoute } from 'vue-router';
 
 export default {
-  props: ['mouse'], 
+  props: ['mouse', 'id'],
   setup() {
-    
+    const route = useRoute();
     const forumComment = ref({});
     const router = useRouter();
 
@@ -107,30 +106,35 @@ export default {
 
     const commentPanel = ref();
     const comment = ref();
-
+    
+    
+    
     const toggle = async (id, event) => {
+      commentPanel.value=true;
+      commentDialog.value=false;
       await axios
         .get("http://localhost:5000/comment/", { id })
         .then((commentList) => {
-          comment.value = commentList.filter((row) => row.mouseID === id);
+          comment.value=commentList.filter((row) => row.post_id===id);
         });
       commentPanel.value.toggle(event);
 
       //debugger;  // eslint-disable-line
-    };
+    }
 
     var currentDate = new Date();
     var fixedDate = currentDate.toDateString();
-
-    const editComment = (mouse, id) => {
-      forumComment.value.mouse = mouse;
-      forumComment.value.mouseID = id;
-      commentDialog.value = true;
-    };
+    const hideDialog = () => {
+            commentDialog.value = false;
+            submitted.value = false;
+        };
     const saveComment = async () => {
       submitted.value = true;
+      
+      
       if (forumComment.value.email.trim()) {
         forumComment.value.posted = fixedDate;
+        forumComment.value.post_id = route.params.id;
         //forumComment.value.mouseID = id;
 
         axios.post("http://localhost:5000/commentPost", forumComment.value).then(
@@ -152,7 +156,7 @@ export default {
       submitted,
       forumComment,
       commentDialog,
-      editComment,
+      hideDialog,
       saveComment,
       commentPanel,
       comment,
