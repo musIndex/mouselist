@@ -104,11 +104,11 @@
             :to="{
               name: 'Comment',
               params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
-              
             }">
             <Button
               icon="pi pi-pencil"
               class="p-button-rounded p-button-success p-mr-2"
+              @click="showDialog(id)" 
               >Edit
             </Button>
           </router-link>

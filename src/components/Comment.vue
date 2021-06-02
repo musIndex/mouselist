@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
@@ -98,22 +98,15 @@ export default {
     const route = useRoute();
     const forumComment = ref({});
     const router = useRouter();
-
     const submitted = ref(false);
-
-    const commentDialog = ref(true);
-
-
+    const commentDialog = ref();
     const commentPanel = ref();
     const comment = ref();
     
-    
-    
     const toggle = async (id, event) => {
-      commentPanel.value=true;
-      commentDialog.value=false;
+      
       await axios
-        .get("http://localhost:5000/comment/", { id })
+        .get("http://localhost:5000/comment{$route.params.id}", { id })
         .then((commentList) => {
           comment.value=commentList.filter((row) => row.post_id===id);
         });
@@ -121,9 +114,18 @@ export default {
 
       //debugger;  // eslint-disable-line
     }
-
+     watch(
+      () => route.params.id,
+      async newId => {
+        commentDialog.value.post_id = await showDialog(newId)
+      }
+    )
     var currentDate = new Date();
     var fixedDate = currentDate.toDateString();
+    const showDialog = (id) =>{
+        commentDialog.value = true;
+        forumComment.value.post_id =id;
+    }
     const hideDialog = () => {
             commentDialog.value = false;
             submitted.value = false;
@@ -148,8 +150,9 @@ export default {
         );
       }
 
-      commentDialog.value = false;
+      //commentDialog.value = false;
       forumComment.value = {};
+      submitted.value = false;
     };
 
     return {
@@ -158,6 +161,7 @@ export default {
       commentDialog,
       hideDialog,
       saveComment,
+      showDialog,
       commentPanel,
       comment,
       toggle,
