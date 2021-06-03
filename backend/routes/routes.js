@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/forum', showForumPost);
  
 // Get comment posts for specific forum post
-router.get('/comment/:id', showCommentPost);
+router.get('/posts/:id', showCommentPost);
  
 // Create New Forum Post
 router.post('/forumPost', createForumPost);

@@ -73,14 +73,14 @@
       <Column header="Comments" style="min-width: 16rem">
         <template #body="{ data }">
           {{ data.notes }}
-          <router-link :to="{ name: 'Comment', params: { id: data.id } }">
-            <Button
+           <router-link :to="{ name: 'Posts', params: { id: data.id} }">
+          <Button
               type="button"
               icon="pi pi-search"
               @click="toggle(data.id, $event)"
-              aria:haspopup="true"
-              aria-controls="overlay_panel"
-            />
+              aria:haspopup="true" 
+              aria-controls="overlay_panel">
+            </Button>
           </router-link>
         </template>
       </Column>

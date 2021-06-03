@@ -15,6 +15,7 @@ export const showForumPost = (req, res) => {
 // Get comment posts for specific mouse post
 export const showCommentPost = (req, res) => {
     getCommentList(req.params.id, (err, results) => {
+        console.log(req.params.id);
         if (err){
             res.send(err);
         }else{

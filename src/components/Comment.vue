@@ -43,44 +43,7 @@
     </template>
   </Dialog>
 
-  <OverlayPanel
-    ref="commentPanel"
-    appendTo="body"
-    :showCloseIcon="true"
-    id="overlay_panel"
-    style="width: 450px"
-    :breakpoints="{ '960px': '75vw' }"
-  >
-    <DataTable
-      :value="comment"
-      :paginator="true"
-      :rows="5"
-      responsiveLayout="scroll"
-    >
-      <Column
-        field="posted_date"
-        header="Posted on"
-        sortable
-        style="width: 50%"
-      ></Column>
-      <Column
-
-        field="comment"
-        header="Comment"
-        sortable
-        style="width: 50%"
-      ></Column>
-      <Column
-        field="email"
-        header="Contact"
-        sortable
-        style="width: 50%"
-      ></Column>
-      <template #body="{ data }">
-        <a :href="`mailto:${data.email}`">{{ data.email }}</a>
-      </template>
-    </DataTable>
-  </OverlayPanel>
+ 
 </template>
 
 <script>
@@ -99,21 +62,8 @@ export default {
     const forumComment = ref({});
     const router = useRouter();
     const submitted = ref(false);
-    const commentDialog = ref();
-    const commentPanel = ref();
-    const comment = ref();
+    const commentDialog = ref(true);
     
-    const toggle = async (id, event) => {
-      
-      await axios
-        .get("http://localhost:5000/comment{$route.params.id}", { id })
-        .then((commentList) => {
-          comment.value=commentList.filter((row) => row.post_id===id);
-        });
-      commentPanel.value.toggle(event);
-
-      //debugger;  // eslint-disable-line
-    }
      watch(
       () => route.params.id,
       async newId => {
@@ -162,9 +112,6 @@ export default {
       hideDialog,
       saveComment,
       showDialog,
-      commentPanel,
-      comment,
-      toggle,
     };
   },
 };
