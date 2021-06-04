@@ -25,9 +25,9 @@ export const getForumList = async (result) => {
 // Get comments for specific forum posts
 export const getCommentList = async (id, result) => {
     try {
-        const queryResults = await pool.query("SELECT * FROM comment WHERE mouse_id = ?", [id]);
+        const queryResults = await pool.query("SELECT * FROM comment WHERE post_id = ?", [id]);
         console.log(id, "got comment list");
-        //console.log(queryResults);
+        console.log(queryResults);
         result(null, queryResults);
     }
     catch (error) {

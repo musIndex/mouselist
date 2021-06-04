@@ -77,7 +77,7 @@
           <Button
               type="button"
               icon="pi pi-search"
-              @click="toggle(data.id, $event)"
+              @click="toggle(id)"
               aria:haspopup="true" 
               aria-controls="overlay_panel">
             </Button>
@@ -340,6 +340,7 @@ export default {
 
     const details = ref("<div>Add Mouse Details</div>");
     const calendar = ref();
+    
 
     return {
       dt,
@@ -356,7 +357,8 @@ export default {
       savePosting,
       choices,
       details,
-      filters1,
+      filters1
+      
     };
   },
 };

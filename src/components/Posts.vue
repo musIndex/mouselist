@@ -7,7 +7,7 @@
     style="width: 450px"
     :breakpoints="{ '960px': '75vw' }"
   >
-    <h4> Mouse Posts </h4>
+    
     <DataTable
       :value="comment"
       :paginator="true"
@@ -39,43 +39,51 @@
   </OverlayPanel>
 </template>
 <script>
-import { ref } from "vue";
-
+import { ref, watch } from "vue";
+import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
 import axios from "axios";
 //import { useRouter } from "vue-router";
-import { useRoute } from "vue-router";
+//import { useRoute } from "vue-router";
 
 export default {
   props: ["mouse", "id"],
   setup() {
-    const route = useRoute();
+    //const route = useRoute();
     //const router = useRouter();
     const commentPanel = ref();
     const comment = ref();
-    
-    
+    const route = useRoute();
+    watch(
+      () => route.params.id,
+      async newId => {
+        comment.value = await toggle(newId)
+      }
+    )
+    const toggle = async (id) => {
+      try {
+        const {
+          data,
+        } = await axios.get("http://localhost:5000/posts/"+id);
+        comment.value = data;
+        
+        commentPanel.value=true;
 
-    const newLocal=async (id, event) => {
-      await axios
-        .get("http://localhost:5000/posts/{route.params.id}", { id })
-        .then((commentList) => {
-          comment.value=commentList.filter(row => {
-            return row.post_id===id;
-          });
-        });
-      commentPanel.value.toggle(event);
-
+        //debugger;  // eslint-disable-line
+      } catch (err) {
+        console.error(err);
+        console.log("error in posts");
+      }
     };
-    const toggle = newLocal;
-   
+    
+    
 
     return {
       commentPanel,
       comment,
-      toggle
+      toggle,
     };
-  }
-}
+  },
+};
 </script>
