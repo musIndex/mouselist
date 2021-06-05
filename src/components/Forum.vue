@@ -344,7 +344,7 @@ export default {
     const toggle = (event) => {
             commentPanel.value.toggle(event);
         };
-    provide('commentPanel', computed(() => commentPanel.value));
+    provide('commentPanel', computed(() => commentPanel.value.toggle));
 
     return {
       dt,

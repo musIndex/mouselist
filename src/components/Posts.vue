@@ -7,7 +7,6 @@
     style="width: 450px"
     :breakpoints="{ '960px': '75vw' }"
   >
-    
     <DataTable
       :value="comment"
       :paginator="true"
@@ -15,13 +14,13 @@
       responsiveLayout="scroll"
     >
       <Column
-        field="posted_date"
+        field="posted"
         header="Posted on"
         sortable
         style="width: 50%"
       ></Column>
       <Column
-        field="comment"
+        field="user_comment"
         header="Comment"
         sortable
         style="width: 50%"
@@ -39,7 +38,7 @@
   </OverlayPanel>
 </template>
 <script>
-import { ref, watch, inject} from "vue";
+import { ref, watch,onMounted, inject} from "vue";
 //import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
@@ -50,21 +49,33 @@ import { useRoute } from "vue-router";
 export default {
   props: ["mouse", "id"],
   setup() {
+    onMounted(async (id) => {
+      try {
+        const { data } = await axios.get("http://localhost:5000/posts/"+id);
+        console.log("mounted posts");
+        console.log(data);
+        comment.value = data;
+
+        loading.value = false;
+      } catch (err) {
+        console.error(err);
+        console.log("error");
+      }
+    });
     
     const route = useRoute();
     //const router = useRouter();
     //const commentPanel = ref();
     const comment = ref();
     const commentPanel = inject('commentPanel');
-    //const loading = ref(true);
-   
-+   
--   watch(
+    const loading = ref(true);
+    watch(
       () => route.params.id,
       async newId => {
-        comment.value = await toggled(newId)
+        commentPanel.value.show = await toggled(newId)
       }
     )
+ 
     const toggled = async (id) => {
       try {
         const {
