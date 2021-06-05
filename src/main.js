@@ -78,7 +78,7 @@ app.component('ColumnGroup', ColumnGroup);
 app.component('Textarea', Textarea);
 app.component('OverlayPanel', OverlayPanel);
 app.component('Mouse',{
-    props: ['mouse', 'id'],
+    props: ['mouse', 'id', 'commentPanel'],
     template:`<h4>{{ mouse }}</h4>`
 });
 app.use(router);

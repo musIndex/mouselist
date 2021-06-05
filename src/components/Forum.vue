@@ -77,7 +77,7 @@
           <Button
               type="button"
               icon="pi pi-search"
-              @click="toggle(id)"
+              @click="toggle()"
               aria:haspopup="true" 
               aria-controls="overlay_panel">
             </Button>
@@ -231,7 +231,7 @@
   </Dialog>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed, provide } from "vue";
 import axios from "axios";
 import { FilterMatchMode } from "primevue/api";
 import "primeflex/primeflex.css";
@@ -340,7 +340,11 @@ export default {
 
     const details = ref("<div>Add Mouse Details</div>");
     const calendar = ref();
-    
+    const commentPanel = ref();
+    const toggle = (event) => {
+            commentPanel.value.toggle(event);
+        };
+    provide('commentPanel', computed(() => commentPanel.value));
 
     return {
       dt,
@@ -357,7 +361,9 @@ export default {
       savePosting,
       choices,
       details,
-      filters1
+      filters1,
+      toggle,
+      
       
     };
   },

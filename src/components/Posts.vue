@@ -39,36 +39,47 @@
   </OverlayPanel>
 </template>
 <script>
-import { ref, watch } from "vue";
-import { useRoute } from 'vue-router';
+import { ref, watch, inject, onMounted } from "vue";
+//import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
 import axios from "axios";
 //import { useRouter } from "vue-router";
-//import { useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 
 export default {
   props: ["mouse", "id"],
   setup() {
-    //const route = useRoute();
-    //const router = useRouter();
-    const commentPanel = ref();
-    const comment = ref();
     const route = useRoute();
+    //const router = useRouter();
+    //const commentPanel = ref();
+    const comment = ref();
+    //const route = useRoute();
+    const commentPanel = inject('commentPanel', {});
+  
+   onMounted(() => {
+        toggled();
+    });
     watch(
-      () => route.params.id,
+      () => (route.params.id),
       async newId => {
-        comment.value = await toggle(newId)
+        comment.value = await toggled(newId)
+        //commentPanel.value.show;
+        
+            //commentPanel.value.visible =true;
       }
     )
-    const toggle = async (id) => {
+
+     
+
+    const toggled = async (id) => {
       try {
         const {
           data,
         } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
-        
-        commentPanel.value=true;
+        console.log(comment);
+        commentPanel.value.show;
 
         //debugger;  // eslint-disable-line
       } catch (err) {
@@ -80,9 +91,9 @@ export default {
     
 
     return {
-      commentPanel,
       comment,
-      toggle,
+      toggled,
+      commentPanel
     };
   },
 };
