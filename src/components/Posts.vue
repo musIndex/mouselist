@@ -50,42 +50,41 @@ import { useRoute } from "vue-router";
 export default {
   props: ["mouse", "id"],
   setup() {
+    
     const route = useRoute();
     //const router = useRouter();
     //const commentPanel = ref();
     const comment = ref();
-    //const route = useRoute();
     const commentPanel = inject('commentPanel');
     //const loading = ref(true);
-
-    watch(
+   
++   
+-   watch(
       () => route.params.id,
       async newId => {
-        comment.value = await toggle(newId)
-        commentPanel.value.show;
+        comment.value = await toggled(newId)
       }
     )
-    
-    const toggle = async (id) => {
+    const toggled = async (id) => {
       try {
         const {
           data,
         } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
-        console.log("posts");
+        console.log("toggled method");
         console.log(data);
-        
-        
-        
+        commentPanel.value=true;
+
+        //debugger;  // eslint-disable-line
       } catch (err) {
         console.error(err);
         console.log("error in posts");
       }
-    }
+    };
 
     return {
       comment,
-      toggle,
+      toggled,
       commentPanel
     };
   },
