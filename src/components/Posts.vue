@@ -61,7 +61,7 @@ export default {
         toggled();
     });
     watch(
-      () => (route.params.id),
+      () => (route.params.id, commentPanel.value),
       async newId => {
         comment.value = await toggled(newId)
         //commentPanel.value.show;
