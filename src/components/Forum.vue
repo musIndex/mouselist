@@ -314,7 +314,7 @@ export default {
       submitted.value = true;
       if (forumPost.value.email.trim()) {
         forumPost.value.needed = forumPost.value.needed.toDateString();
-        console.log(forumPost.value.needed);
+        
         forumPost.value.actions = forumPost.value.actions.value
           ? forumPost.value.actions.value
           : forumPost.value.actions;

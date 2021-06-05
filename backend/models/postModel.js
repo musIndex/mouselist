@@ -5,7 +5,6 @@ import pool from "../config/database.js";
 export const getForumList = async (result) => {
     try {
         const queryResults = await pool.query("SELECT * FROM forum");
-        console.log(queryResults);
         result(null, queryResults);
     }
     catch (error) {
@@ -46,11 +45,8 @@ export const insertForumPost = async (data, result) => {
         }
         
         const query = `INSERT INTO forum SET ${dataProps.join(',')}`
-        console.log(query);
         const queryResults = await pool.query(query);
-        console.log(data);
         result(null, queryResults);
-        console.log(queryResults);
     }
     catch (error){
         console.log(error);
@@ -68,7 +64,6 @@ export const insertCommentPost = async (data, result) => {
         }
         
         const query = `INSERT INTO comment SET ${dataProps.join(',')}`
-        console.log(query);
         
         const queryResults = await pool.query(query);
         

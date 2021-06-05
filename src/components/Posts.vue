@@ -39,7 +39,7 @@
   </OverlayPanel>
 </template>
 <script>
-import { ref, watch, inject, onMounted } from "vue";
+import { ref, watch, inject} from "vue";
 //import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
@@ -55,44 +55,37 @@ export default {
     //const commentPanel = ref();
     const comment = ref();
     //const route = useRoute();
-    const commentPanel = inject('commentPanel', {});
-  
-   onMounted(() => {
-        toggled();
-    });
+    const commentPanel = inject('commentPanel');
+    //const loading = ref(true);
+
     watch(
-      () => (route.params.id, commentPanel.value),
+      () => route.params.id,
       async newId => {
-        comment.value = await toggled(newId)
-        //commentPanel.value.show;
-        
-            //commentPanel.value.visible =true;
+        comment.value = await toggle(newId)
+        commentPanel.value.show;
       }
     )
-
-     
-
-    const toggled = async (id) => {
+    
+    const toggle = async (id) => {
       try {
         const {
           data,
         } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
-        console.log(comment);
-        commentPanel.value.show;
-
-        //debugger;  // eslint-disable-line
+        console.log("posts");
+        console.log(data);
+        
+        
+        
       } catch (err) {
         console.error(err);
         console.log("error in posts");
       }
-    };
-    
-    
+    }
 
     return {
       comment,
-      toggled,
+      toggle,
       commentPanel
     };
   },
