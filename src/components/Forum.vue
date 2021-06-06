@@ -340,10 +340,7 @@ export default {
 
     const details = ref("<div>Add Mouse Details</div>");
     const calendar = ref();
-    const commentPanel = ref();
-    const toggle = (event) => {
-            commentPanel.value.toggle(event);
-        };
+    
         //get rid of provide
     //provide('commentPanel', computed(() => commentPanel.value.toggle));
 
@@ -363,7 +360,7 @@ export default {
       choices,
       details,
       filters1,
-      toggle,
+     
       
       
     };

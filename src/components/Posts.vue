@@ -1,4 +1,5 @@
 <template>
+<Button type="button" icon="pi pi-search" @click="toggle($event)" aria:haspopup="true" aria-controls="overlay_panel" />
   <OverlayPanel
     ref="commentPanel"
     appendTo="body"
@@ -72,7 +73,7 @@ export default {
     watch(
       () => route.params.id,
       async newId => {
-        commentPanel.value.show = await toggled(newId)
+        await toggled(newId)
       }
     )
  
@@ -84,19 +85,27 @@ export default {
         comment.value = data;
         console.log("toggled method");
         console.log(data);
-        commentPanel.value=true;
-
+        //commentPanel.value=true;
+        
         //debugger;  // eslint-disable-line
       } catch (err) {
         console.error(err);
         console.log("error in posts");
       }
     };
+    const toggle = (event) =>  {
+            
+           commentPanel.value.toggle(event);
+         
+            //debugger;  // eslint-disable-line 
 
+        };
+      
     return {
       comment,
       toggled,
-      commentPanel
+      toggle
+    
     };
   },
 };
