@@ -77,7 +77,7 @@
           <Button
               type="button"
               icon="pi pi-search"
-              @click="toggle()"
+              @click="toggle(id,$event)"
               aria:haspopup="true" 
               aria-controls="overlay_panel">
             </Button>

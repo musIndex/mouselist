@@ -72,12 +72,12 @@ export default {
     const loading = ref(true);
     watch(
       () => route.params.id,
-      async newId => {
-        await toggled(newId)
+      async (newId, $event) => {
+        await toggle(newId, $event)
       }
     )
  
-    const toggled = async (id) => {
+    const toggle = async (id, event) => {
       try {
         const {
           data,
@@ -92,18 +92,14 @@ export default {
         console.error(err);
         console.log("error in posts");
       }
+      commentPanel.value.toggle(event);
     };
-    const toggle = (event) =>  {
-            
-           commentPanel.value.toggle(event);
-         
-            //debugger;  // eslint-disable-line 
-
-        };
+     
+    
       
     return {
       comment,
-      toggled,
+      commentPanel,
       toggle
     
     };
