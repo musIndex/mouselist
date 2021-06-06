@@ -231,7 +231,7 @@
   </Dialog>
 </template>
 <script>
-import { ref, onMounted, computed, provide } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { FilterMatchMode } from "primevue/api";
 import "primeflex/primeflex.css";
@@ -344,7 +344,8 @@ export default {
     const toggle = (event) => {
             commentPanel.value.toggle(event);
         };
-    provide('commentPanel', computed(() => commentPanel.value.toggle));
+        //get rid of provide
+    //provide('commentPanel', computed(() => commentPanel.value.toggle));
 
     return {
       dt,

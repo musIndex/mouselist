@@ -38,7 +38,7 @@
   </OverlayPanel>
 </template>
 <script>
-import { ref, watch,onMounted, inject} from "vue";
+import { ref, watch,onMounted} from "vue";
 //import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
@@ -65,9 +65,9 @@ export default {
     
     const route = useRoute();
     //const router = useRouter();
-    //const commentPanel = ref();
+    const commentPanel = ref();
     const comment = ref();
-    const commentPanel = inject('commentPanel');
+    //const commentPanel = inject('commentPanel');
     const loading = ref(true);
     watch(
       () => route.params.id,
