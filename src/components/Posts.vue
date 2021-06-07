@@ -13,6 +13,7 @@
       :paginator="true"
       :rows="5"
       responsiveLayout="scroll"
+      :loading="loading"
     >
       <Column
         field="posted"
@@ -72,23 +73,23 @@ export default {
       () => route.params.id,
       async (newId) => {
        comment.value = await getTable(newId);
-       commentPanel.value.toggle();
+       //commentPanel.value.toggle();
       }
     )
     const getTable = (async (id) => {
       try {
         const { data } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
-        loading.value = false;
+        //loading.value = false;
       } catch (err) {
         console.error(err);
         console.log("error getting comments");
       }
-      
+      toggle();
     });
     const toggle = (event)=> {
       commentPanel.value.toggle(event);
-      console.log(commentPanel.value);
+      console.log("CommentPanel value:");
     }
     
       

@@ -16,6 +16,7 @@ export const showForumPost = (req, res) => {
 export const showCommentPost = (req, res) => {
     getCommentList(req.params.id, (err, results) => {
         console.log(req.params.id);
+        console.log("got comment post request");
         if (err){
             res.send(err);
         }else{
