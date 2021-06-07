@@ -1,5 +1,5 @@
 <template>
-<Button type="button" icon="pi pi-search" @click="toggle($event)" aria:haspopup="true" aria-controls="overlay_panel" />
+
   <OverlayPanel
     ref="commentPanel"
     appendTo="body"
@@ -39,7 +39,7 @@
   </OverlayPanel>
 </template>
 <script>
-import { ref, watch,onMounted} from "vue";
+import { ref, watch, onMounted} from "vue";
 //import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
@@ -53,45 +53,32 @@ export default {
     onMounted(async (id) => {
       try {
         const { data } = await axios.get("http://localhost:5000/posts/"+id);
-        console.log("mounted posts");
-        console.log(data);
         comment.value = data;
-
         loading.value = false;
       } catch (err) {
         console.error(err);
-        console.log("error");
+        console.log("error mounting comments");
       }
     });
-    
     const route = useRoute();
     //const router = useRouter();
     const commentPanel = ref();
     const comment = ref();
     //const commentPanel = inject('commentPanel');
     const loading = ref(true);
+    
     watch(
       () => route.params.id,
-      async (newId, $event) => {
-        await toggle(newId, $event)
+      async (newId) => {
+       commentPanel.value = await onMounted(newId)
       }
     )
- 
-    const toggle = async (id, event) => {
-      try {
-        const {
-          data,
-        } = await axios.get("http://localhost:5000/posts/"+id);
-        comment.value = data;
-        console.log("toggled method");
-        console.log(data);
-        //commentPanel.value=true;
-        
-        //debugger;  // eslint-disable-line
-      } catch (err) {
-        console.error(err);
-        console.log("error in posts");
-      }
+
+
+
+
+    const toggle = (event) => {
+      
       commentPanel.value.toggle(event);
     };
      
@@ -100,7 +87,8 @@ export default {
     return {
       comment,
       commentPanel,
-      toggle
+      toggle,
+      loading
     
     };
   },
