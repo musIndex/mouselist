@@ -50,9 +50,9 @@ import { useRoute } from "vue-router";
 export default {
   props: ["mouse", "id"],
   setup() {
-    onMounted(async (id) => {
+    onMounted(async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/posts/"+id);
+        const { data } = await axios.get(`http://localhost:5000/posts/`);
         comment.value = data;
         loading.value = false;
       } catch (err) {
@@ -70,19 +70,26 @@ export default {
     watch(
       () => route.params.id,
       async (newId) => {
-       commentPanel.value = await onMounted(newId)
+       commentPanel.value = await toggle(newId)
       }
     )
-
-
-
-
-    const toggle = (event) => {
-      
+    const toggle = async (id, event) => {
+      try {
+        const {
+          data,
+        } = await axios.get("http://localhost:5000/posts/"+id);
+        comment.value = data;
+        console.log("toggled method");
+        console.log(data);
+        //commentPanel.value=true;
+        
+        //debugger;  // eslint-disable-line
+      } catch (err) {
+        console.error(err);
+        console.log("error in posts");
+      }
       commentPanel.value.toggle(event);
-    };
-     
-    
+    }
       
     return {
       comment,
