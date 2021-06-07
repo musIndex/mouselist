@@ -31,10 +31,11 @@
         header="Contact"
         sortable
         style="width: 50%"
-      ></Column>
+      >
       <template #body="{ data }">
         <a :href="`mailto:${data.email}`">{{ data.email }}</a>
       </template>
+      </Column>
     </DataTable>
   </OverlayPanel>
 </template>
@@ -50,9 +51,9 @@ import { useRoute } from "vue-router";
 export default {
   props: ["mouse", "id"],
   setup() {
-    onMounted(async () => {
+    onMounted(async (id) => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/posts/`);
+        const { data } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
         loading.value = false;
       } catch (err) {
@@ -66,36 +67,37 @@ export default {
     const comment = ref();
     //const commentPanel = inject('commentPanel');
     const loading = ref(true);
-    
-    watch(
+
+ watch(
       () => route.params.id,
       async (newId) => {
-       commentPanel.value = await toggle(newId)
+       comment.value = await getTable(newId);
+       commentPanel.value.toggle();
       }
     )
-    const toggle = async (id, event) => {
+    const getTable = (async (id) => {
       try {
-        const {
-          data,
-        } = await axios.get("http://localhost:5000/posts/"+id);
+        const { data } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
-        console.log("toggled method");
-        console.log(data);
-        //commentPanel.value=true;
-        
-        //debugger;  // eslint-disable-line
+        loading.value = false;
       } catch (err) {
         console.error(err);
-        console.log("error in posts");
+        console.log("error getting comments");
       }
+      
+    });
+    const toggle = (event)=> {
       commentPanel.value.toggle(event);
+      console.log(commentPanel.value);
     }
+    
       
     return {
       comment,
       commentPanel,
-      toggle,
-      loading
+      loading,
+      getTable,
+      toggle
     
     };
   },
