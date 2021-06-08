@@ -1,5 +1,6 @@
 <template>
 <div>
+  <teleport to="#comment-post">
   <Button
     type="button"
     icon="pi pi-search"
@@ -8,6 +9,7 @@
     aria:haspopup="true" 
     aria-controls="overlay_panel">
   </Button>
+  </teleport>
   <OverlayPanel
     ref="commentPanel"
     appendTo="body"
