@@ -3,7 +3,8 @@
   <Button
     type="button"
     icon="pi pi-search"
-    @click="toggle(id,$event)"
+    label="View Comments"
+    @click="toggle($event)"
     aria:haspopup="true" 
     aria-controls="overlay_panel">
   </Button>
@@ -80,11 +81,11 @@ export default {
  watch(
       () => route.params.id, 
       async (newId) => {
-       comment.value = await toggle(newId);
+       await getComments(newId);
        //commentPanel.value.toggle();
       }
     )
-    const toggle = (async (id,event) => {
+    const getComments = (async (id) => {
       try {
         const { data } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
@@ -94,16 +95,20 @@ export default {
         console.error(err);
         console.log("error getting comments");
       }
-     //need to call toggle
-      commentPanel.value.toggle(event);
-      console.log("got toggle");
-    });
     
+    });
+     //need to capture browser toggle
+  
+    const toggle = (event) => {
+        commentPanel.value.toggle(event);
+        console.log("got toggle");
+        };
     return {
       comment,
       commentPanel,
       loading,
-      toggle
+      toggle,
+      getComments
     
     };
   },
