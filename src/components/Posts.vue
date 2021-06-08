@@ -1,5 +1,12 @@
 <template>
-
+<div>
+  <Button
+    type="button"
+    icon="pi pi-search"
+    @click="toggle(id,$event)"
+    aria:haspopup="true" 
+    aria-controls="overlay_panel">
+  </Button>
   <OverlayPanel
     ref="commentPanel"
     appendTo="body"
@@ -39,6 +46,7 @@
       </Column>
     </DataTable>
   </OverlayPanel>
+</div>
 </template>
 <script>
 import { ref, watch, onMounted} from "vue";
@@ -70,34 +78,31 @@ export default {
     const loading = ref(true);
 
  watch(
-      () => route.params.id,
+      () => route.params.id, 
       async (newId) => {
-       comment.value = await getTable(newId);
+       comment.value = await toggle(newId);
        //commentPanel.value.toggle();
       }
     )
-    const getTable = (async (id) => {
+    const toggle = (async (id,event) => {
       try {
         const { data } = await axios.get("http://localhost:5000/posts/"+id);
         comment.value = data;
+        console.log("Got data:",data);
         //loading.value = false;
       } catch (err) {
         console.error(err);
         console.log("error getting comments");
       }
-      toggle();
-    });
-    const toggle = (event)=> {
+     //need to call toggle
       commentPanel.value.toggle(event);
-      console.log("CommentPanel value:");
-    }
+      console.log("got toggle");
+    });
     
-      
     return {
       comment,
       commentPanel,
       loading,
-      getTable,
       toggle
     
     };
