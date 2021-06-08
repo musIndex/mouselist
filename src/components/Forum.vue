@@ -29,7 +29,7 @@
       responsiveLayout="scroll"
     >
       <template #header>
-        <div class="table-header" id="comment-post">
+        <div class="table-header" >
           <h2 class="p-m-0">Mouselist Posts</h2>
           <span class="p-input-icon-left">
             <i class="pi pi-search" />
@@ -71,7 +71,8 @@
         style="min-width: 16rem"
       ></Column>
       <Column header="Comments" style="min-width: 16rem"  >
-        <template #body="{ data }">
+        <template  #body="{ data }" > 
+          <div id="comment-post"/>
           {{ data.notes }}
            <router-link :to="{ name: 'Posts', params: { id: data.id} }">
           <Button
@@ -82,7 +83,10 @@
               aria:haspopup="true" 
               aria-controls="overlay_panel">
             </Button>
+            
+            
           </router-link>
+          
         </template>
       </Column>
       <Column
