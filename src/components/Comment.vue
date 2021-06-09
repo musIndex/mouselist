@@ -5,6 +5,7 @@
     :style="{ width: '450px' }"
     header="Post Comment"
     :modal="true"
+    :closable="false"
     class="p-fluid"
   >
     <div id='mouse' class="p-field"  >
@@ -79,7 +80,10 @@ export default {
     const hideDialog = () => {
             commentDialog.value = false;
             submitted.value = false;
-        };
+            router.push("/");
+    };
+    
+        
     const saveComment = async () => {
       submitted.value = true;
       
