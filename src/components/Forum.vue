@@ -70,24 +70,34 @@
         :sortable="true"
         style="min-width: 10rem"
       ></Column>
-      <Column header="Comments" style="min-width: 16rem"  >
-      
+      <Column header="Comments" style="min-width: 16rem"  > 
         <template  #body="{ data }" > 
           {{ data.comments }}
-           <router-link :to="{ name: 'Posts', params: { id: data.id} }">
-          
+        </template>
+      </Column>
+      <Column header="User comments">
+        <template #body="slotProps">
+          <router-link
+            :to="{
+              name: 'Posts',
+              params: {id: slotProps.data.id}
+              }"
+          >
           <Button
               type="button"
               icon="pi pi-search"
-              
               @click="toggle(id,$event)"
               aria:haspopup="true" 
               aria-controls="overlay_panel">
             </Button>
-          
+             
+
           </router-link>
-          <div id="comment-post"/>
+          <div id="comment-post" >
+          <CommentPosts ref="postComponent"  />
+          </div>
         </template>
+
       </Column>
       <Column
         field="contact"
@@ -242,10 +252,14 @@ import { FilterMatchMode } from "primevue/api";
 import "primeflex/primeflex.css";
 import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
+import CommentPosts from "../components/Posts.vue"
 
 
 export default {
-    
+  name: "Forum",
+  components: {
+    CommentPosts,
+  },
   created() {
     let today = new Date();
     let month = today.getMonth();
@@ -277,7 +291,7 @@ export default {
         console.log("error");
       }
     });
-    
+    const postComponent = ref(null);
     const router = useRouter();
     const loading = ref(true);
     const forum = ref();
@@ -365,8 +379,7 @@ export default {
       choices,
       details,
       filters1,
-     
-      
+      postComponent
       
     };
   },

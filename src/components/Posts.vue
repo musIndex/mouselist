@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id='post-list'>
   <teleport to="#comment-post">
   <Button
     type="button"
