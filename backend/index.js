@@ -16,5 +16,5 @@ app.use(cors());
  
 // use router
 app.use(Router);
- 
-app.listen(5000, () => console.log('Server running at http://localhost:5000'));
+const port = process.emv.PORT || 5000;
+app.listen( port, () => console.log(`Server running at port ${port}`));

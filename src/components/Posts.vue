@@ -4,6 +4,7 @@
   <Button
     type="button"
     icon="pi pi-search"
+    showCloseIcon ="true"
     label="View Comments"
     @click="toggle($event)"
     aria:haspopup="true" 
@@ -82,11 +83,12 @@ export default {
 
  watch(
       () => route.params.id, 
-      async (newId) => {
+      async (newId) => { 
        await getComments(newId);
        //commentPanel.value.toggle();
       }
     )
+    
     const getComments = (async (id) => {
       try {
         const { data } = await axios.get("http://localhost:5000/posts/"+id);

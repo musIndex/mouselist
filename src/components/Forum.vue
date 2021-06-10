@@ -44,7 +44,7 @@
         field="posted"
         header="Posted"
         :sortable="true"
-        style="min-width: 12rem"
+        style="min-width: 10rem"
       ></Column>
       <Column
         field="mouse"
@@ -62,19 +62,20 @@
         field="actions"
         header="Action"
         :sortable="true"
-        style="min-width: 16rem"
+        style="min-width: 10rem"
       ></Column>
       <Column
         field="needed"
         header="Date Needed"
         :sortable="true"
-        style="min-width: 16rem"
+        style="min-width: 10rem"
       ></Column>
       <Column header="Comments" style="min-width: 16rem"  >
+      
         <template  #body="{ data }" > 
-          <div id="comment-post"/>
-          {{ data.notes }}
+          {{ data.comments }}
            <router-link :to="{ name: 'Posts', params: { id: data.id} }">
+          
           <Button
               type="button"
               icon="pi pi-search"
@@ -83,10 +84,9 @@
               aria:haspopup="true" 
               aria-controls="overlay_panel">
             </Button>
-            
-            
-          </router-link>
           
+          </router-link>
+          <div id="comment-post"/>
         </template>
       </Column>
       <Column
