@@ -71,34 +71,34 @@
         style="min-width: 10rem"
       ></Column>
       <Column header="Comments" style="min-width: 16rem"  > 
-        <template  #body="{ data }" > 
-          {{ data.comments }}
+        <template id="comment-post"  #body="{ data }" > 
+          {{ data.comments}} 
+           
         </template>
       </Column>
-      <Column header="User comments">
-        <template #body="slotProps">
+      <Column  header="User comments"
+      >
+      <template #body="slotProps" >
+        
           <router-link
             :to="{
               name: 'Posts',
-              params: {id: slotProps.data.id}
-              }"
-          >
-          <Button
+              params: {id: slotProps.data.id }
+            }">
+            <Button
               type="button"
               icon="pi pi-search"
               @click="toggle(id,$event)"
               aria:haspopup="true" 
-              aria-controls="overlay_panel">
+              aria-controls="overlay_panel"
+              >Select 
             </Button>
-             
-
           </router-link>
-          <div id="comment-post" >
-          <CommentPosts ref="postComponent"  />
-          </div>
+          <CommentPosts ref="postComponent" />
+          <div id="comment-post"/>
         </template>
-
       </Column>
+      
       <Column
         field="contact"
         header="Contact"
@@ -256,7 +256,7 @@ import CommentPosts from "../components/Posts.vue"
 
 
 export default {
-  name: "Forum",
+ name: "Forum",
   components: {
     CommentPosts,
   },
@@ -291,7 +291,7 @@ export default {
         console.log("error");
       }
     });
-    const postComponent = ref(null);
+    
     const router = useRouter();
     const loading = ref(true);
     const forum = ref();
@@ -359,7 +359,8 @@ export default {
 
     const details = ref("<div>Add Mouse Details</div>");
     const calendar = ref();
-    
+    const postComponent = ref(null);
+
         //get rid of provide
     //provide('commentPanel', computed(() => commentPanel.value.toggle));
 

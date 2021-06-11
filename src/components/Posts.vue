@@ -1,6 +1,6 @@
 <template>
 <div id='post-list'>
-  <teleport to="#comment-post">
+  
   <Button
     type="button"
     icon="pi pi-search"
@@ -10,7 +10,7 @@
     aria:haspopup="true" 
     aria-controls="overlay_panel">
   </Button>
-  </teleport>
+  <teleport to="#comment-post">
   <OverlayPanel
     ref="commentPanel"
     appendTo="body"
@@ -50,6 +50,7 @@
       </Column>
     </DataTable>
   </OverlayPanel>
+  </teleport>
 </div>
 </template>
 <script>
