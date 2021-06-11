@@ -79,15 +79,14 @@
       <Column  header="User comments"
       >
       <template #body="slotProps" >
-        
+        <div id="comment-post"/>
           <router-link
             :to="{
               name: 'Posts',
-              params: {id: slotProps.data.id }
+              params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
             }">
             <Button
               type="button"
-              icon="pi pi-search"
               @click="toggle(id,$event)"
               aria:haspopup="true" 
               aria-controls="overlay_panel"
@@ -95,7 +94,7 @@
             </Button>
           </router-link>
           <CommentPosts ref="postComponent" />
-          <div id="comment-post"/>
+          
         </template>
       </Column>
       

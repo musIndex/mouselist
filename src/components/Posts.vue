@@ -18,7 +18,10 @@
     id="overlay_panel"
     style="width: 450px"
     :breakpoints="{ '960px': '75vw' }"
-  >
+  ><div id='mouse' class="p-field"  >
+      <h4>{{mouse}}</h4>
+    </div>
+    
     <DataTable
       :value="comment"
       :paginator="true"
