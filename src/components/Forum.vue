@@ -70,8 +70,8 @@
         :sortable="true"
         style="min-width: 10rem"
       ></Column>
-      <Column header="Comments" style="min-width: 16rem"  > 
-        <template id="comment-post"  #body="{ data }" > 
+      <Column header="Notes" style="min-width: 16rem"  > 
+        <template #body="{ data }" > 
           {{ data.comments}} 
            
         </template>
@@ -85,16 +85,10 @@
               name: 'Posts',
               params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
             }">
-            <Button
-              type="button"
-              @click="toggle(id,$event)"
-              aria:haspopup="true" 
-              aria-controls="overlay_panel"
-              >Select 
-            </Button>
-          </router-link>
-          <CommentPosts ref="postComponent" />
+            
           
+          <CommentPosts ref="postComponent" />
+          </router-link>
         </template>
       </Column>
       

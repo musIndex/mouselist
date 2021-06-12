@@ -70,7 +70,7 @@ export default {
   setup() {
     onMounted(async (id) => {
       try {
-        const { data } = await axios.get("http://localhost:5000/posts/"+id);
+        const { data } = await axios.get("http://localhost:5000"+"/posts/"+id);
         comment.value = data;
         loading.value = false;
       } catch (err) {
@@ -79,10 +79,11 @@ export default {
       }
     });
     const route = useRoute();
-    //const router = useRouter();
+    
+    //const port = process.emv.PORT || "http://localhost:5000";
+    
     const commentPanel = ref();
     const comment = ref();
-    //const commentPanel = inject('commentPanel');
     const loading = ref(true);
 
  watch(
@@ -92,10 +93,10 @@ export default {
        //commentPanel.value.toggle();
       }
     )
-    
+  
     const getComments = (async (id) => {
       try {
-        const { data } = await axios.get("http://localhost:5000/posts/"+id);
+        const { data } = await axios.get("http://localhost:5000"+"/posts/"+id);
         comment.value = data;
         console.log("Got data:",data);
         //loading.value = false;
