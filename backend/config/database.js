@@ -3,7 +3,8 @@ const require = createRequire(import.meta.url);
 //const port = process.emv.PORT || 5000;
 const mariadb = require('mariadb');
 
-
+//localhost
+/*
 const pool = mariadb.createPool({
      
      host:'localhost', 
@@ -14,12 +15,14 @@ const pool = mariadb.createPool({
      }  
 
 );
-/*
+*/
+
+///*
 const pool = mariadb.createPool({
-     host: 'process.emv.DB_HOST', 
-     database:'process.emv.DB_NAME',
-     user: 'process.emv.DB_USER', 
-     password: 'process.emv.DB_PASSWORD',
+     host: 'process.env.DB_HOST', 
+     database:'process.env.DB_NAME',
+     user: 'process.env.DB_USER', 
+     password: 'process.env.DB_PASSWORD',
      connectionLimit: 5 });
 pool.getConnection()
     .then(conn => {
@@ -29,5 +32,5 @@ pool.getConnection()
     .catch(err => {
       console.log("not connected due to error: " + err);
     });
-    */
+    //*/
     export default pool;

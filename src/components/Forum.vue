@@ -276,7 +276,7 @@ export default {
   setup() {
     onMounted(async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/forum");
+        const { data } = await axios.get(port+"/forum");
         forum.value = data;
         loading.value = false;
       } catch (err) {
@@ -289,7 +289,7 @@ export default {
     const loading = ref(true);
     const forum = ref();
     const forumPost = ref({});
-
+    const port = process.env.PORT || "http://localhost:5000";
     const dt = ref();
 
     const toast = useToast();
