@@ -6,18 +6,18 @@ import Posts from '../components/Posts.vue'
 const routes = [
     {
       name: 'Forum',
-      path: '/',
+      path: '/api',
       component: Forum,
       props: true,
         children: [
           {
-            path: 'comment/:id',
+            path: '/api/comment/:id',
               name: 'Comment',
               component: Comment,
               props: true
           },
           {
-            path: 'posts/:id',
+            path: '/api/posts/:id',
               name: 'Posts',
               component: Posts,
               props: true

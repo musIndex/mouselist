@@ -70,7 +70,7 @@ export default {
   setup() {
     onMounted(async (id) => {
       try {
-        const { data } = await axios.get(port+"/posts/"+id);
+        const { data } = await axios.get(baseURL+"/api/posts/"+id);
         comment.value = data;
         console.log(comment.value);
         loading.value = false;
@@ -80,9 +80,7 @@ export default {
       }
     });
     const route = useRoute();
-    
-    const port = process.env.PORT || "http://localhost:5000";
-    
+    const baseURL = window.location.origin || "http://localhost:5000"
     const commentPanel = ref();
     const comment = ref();
     const loading = ref(true);
@@ -100,7 +98,7 @@ export default {
   
     const getComments = (async (id) => {
       try {
-        const { data } = await axios.get(port+"/posts/"+id);
+        const { data } = await axios.get(baseURL+"/api/posts/"+id);
         comment.value = data;
         console.log("Got data:",data);
         //loading.value = false;

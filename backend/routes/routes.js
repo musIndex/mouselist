@@ -9,16 +9,16 @@ import { showForumPost, showCommentPost, createForumPost, createCommentPost} fro
 const router = express.Router();
  
 // Get All forum posts
-router.get('/forum', showForumPost);
+router.get('/api/forum', showForumPost);
  
 // Get comment posts for specific forum post
-router.get('/posts/:id', showCommentPost);
+router.get('/api/posts/:id', showCommentPost);
  
 // Create New Forum Post
-router.post('/forumPost', createForumPost);
+router.post('/api/forumPost', createForumPost);
 
 // Create New Comment Post
-router.post('/commentPost', createCommentPost);
+router.post('/api/commentPost', createCommentPost);
  
  
 // export default router

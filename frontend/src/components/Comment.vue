@@ -82,8 +82,8 @@ export default {
             submitted.value = false;
             router.push("/");
     };
-    
-    const port = process.env.PORT || "http://localhost:5000";    
+    const baseURL = window.location.origin || "http://localhost:5000"
+       
     const saveComment = async () => {
       submitted.value = true;
       if (forumComment.value.email.trim()) {
@@ -91,7 +91,7 @@ export default {
         forumComment.value.post_id = route.params.id;
         //forumComment.value.mouseID = id;
 
-        axios.post(port+"/commentPost", forumComment.value).then(
+        axios.post(baseURL+"/api/commentPost", forumComment.value).then(
           (response) => {
             router.push("/");
             console.log(response);
