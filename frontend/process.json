@@ -1,7 +1,0 @@
-{
-    "script": "serve",
-    "env": {
-        "PM2_SERVE_PATH": './frontend/dist'
-    }
-    "args": '--no-daemon'
-}
