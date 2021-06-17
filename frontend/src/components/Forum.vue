@@ -276,7 +276,7 @@ export default {
   setup() {
     onMounted(async () => {
       try {
-        const { data } = await axios.get(baseURL+"/api/forum");
+        const { data } = await axios.get(`${process.env.WEBSITE_HOSTNAME}:${process.env.PORT}`+"/api/forum");
         forum.value = data;
         loading.value = false;
       } catch (err) {
@@ -289,7 +289,7 @@ export default {
     const loading = ref(true);
     const forum = ref();
     const forumPost = ref({});
-    const baseURL = window.location.origin || "http://localhost:5000";
+    //const baseURL = window.location.origin || "http://localhost:5000";
     const dt = ref();
 
     const toast = useToast();
@@ -333,7 +333,7 @@ export default {
         forumPost.value.posted = fixedDate;
         //forum.value.push(forumPost.value);
         try {
-          await axios.post(baseURL+"/api/forumPost", forumPost.value);
+          await axios.post(`${process.env.WEBSITE_HOSTNAME}:${process.env.PORT}`+"/api/forumPost", forumPost.value);
           router.push("/");
         } catch (error) {
           console.log(error);
