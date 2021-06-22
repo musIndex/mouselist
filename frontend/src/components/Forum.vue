@@ -274,14 +274,18 @@ export default {
   },
 
   setup() {
+    const baseURL = window.location.host;
+
     onMounted(async () => {
       try {
-        const { data } = await axios.get({baseURL}+"/api/forum");
+        const { data } = await axios.get(`http://${baseURL}/api/forum`);
+        console.log(baseURL);
         forum.value = data;
         loading.value = false;
       } catch (err) {
         console.error(err);
         console.log("error");
+        console.log(baseURL);
       }
     });
     
@@ -290,7 +294,7 @@ export default {
     const forum = ref();
     const forumPost = ref({});
     
-    const baseURL = window.location.origin;
+    
     const dt = ref();
 
     const toast = useToast();

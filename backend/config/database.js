@@ -1,6 +1,6 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-//const port = process.emv.PORT || 5000;
+//const port = process.env.PORT || 5000;
 const mariadb = require('mariadb');
 
 //localhost
@@ -33,4 +33,4 @@ pool.getConnection()
       console.log("not connected due to error: " + err);
     });
     //*/
-    export default pool;
+export default pool;

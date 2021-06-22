@@ -16,7 +16,7 @@ app.use(json());
  // use router
 app.use(Router);
 
-const path = __dirname + '/views/';
+const path = __dirname + '/../frontend/dist/';
 
 app.use(express.static(path));
 
