@@ -80,10 +80,9 @@ export default {
     const hideDialog = () => {
             commentDialog.value = false;
             submitted.value = false;
-            router.push("/");
+            router.push("/api");
     };
-    const baseURL = window.location.origin || "http://localhost:5000"
-       
+    const baseURL = `${window.location.protocol}//${window.location.host}`;  
     const saveComment = async () => {
       submitted.value = true;
       if (forumComment.value.email.trim()) {
@@ -91,7 +90,7 @@ export default {
         forumComment.value.post_id = route.params.id;
         //forumComment.value.mouseID = id;
 
-        axios.post(baseURL+"/api/commentPost", forumComment.value).then(
+        axios.post(`${baseURL}/api/commentPost`, forumComment.value).then(
           (response) => {
             router.push("/");
             console.log(response);

@@ -274,11 +274,11 @@ export default {
   },
 
   setup() {
-    const baseURL = window.location.host;
+    const baseURL = `${window.location.protocol}//${window.location.host}`;
 
     onMounted(async () => {
       try {
-        const { data } = await axios.get(`http://${baseURL}/api/forum`);
+        const { data } = await axios.get(`${baseURL}/api/forum`);
         console.log(baseURL);
         forum.value = data;
         loading.value = false;
@@ -338,7 +338,7 @@ export default {
         forumPost.value.posted = fixedDate;
         //forum.value.push(forumPost.value);
         try {
-          await axios.post("/"+`${baseURL}`+"/api/forumPost", forumPost.value);
+          await axios.post(`${baseURL}/api/forumPost`, forumPost.value);
           router.push("/");
         } catch (error) {
           console.log(error);

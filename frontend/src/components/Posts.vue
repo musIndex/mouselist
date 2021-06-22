@@ -68,6 +68,7 @@ import { useRoute } from "vue-router";
 export default {
   props: ["mouse", "id"],
   setup() {
+    const baseURL = `${window.location.protocol}//${window.location.host}`;
     onMounted(async (id) => {
       try {
         const { data } = await axios.get(baseURL+"/api/posts/"+id);
@@ -80,7 +81,7 @@ export default {
       }
     });
     const route = useRoute();
-    const baseURL = window.location.origin || "http://localhost:5000"
+    
     const commentPanel = ref();
     const comment = ref();
     const loading = ref(true);
@@ -98,7 +99,7 @@ export default {
   
     const getComments = (async (id) => {
       try {
-        const { data } = await axios.get(baseURL+"/api/posts/"+id);
+        const { data } = await axios.get(`${baseURL}/api/posts/`+id);
         comment.value = data;
         console.log("Got data:",data);
         //loading.value = false;
