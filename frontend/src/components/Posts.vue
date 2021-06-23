@@ -6,7 +6,7 @@
     icon="pi pi-search"
     showCloseIcon ="true"
     label="View Comments"
-    @click="toggle($event)"
+    @click="toggle($event, id)"
     aria:haspopup="true" 
     aria-controls="overlay_panel">
   </Button>
@@ -81,19 +81,14 @@ export default {
       }
     });
     const route = useRoute();
-    
     const commentPanel = ref();
     const comment = ref();
     const loading = ref(true);
 
  watch(
-  
       () => route.params.id, 
       async (newId) => { 
-      
-       await getComments(newId);
-       
-
+      await getComments(newId);
       }
     );
   
@@ -111,8 +106,9 @@ export default {
     });
      //need to capture browser toggle
   
-    const toggle = (event) => {
+    const toggle = (event, id) => {
         commentPanel.value.toggle(event);
+        getComments(id);
         console.log("got toggle");
         };
     return {
