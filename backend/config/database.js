@@ -4,7 +4,7 @@ const require = createRequire(import.meta.url);
 const mariadb = require('mariadb');
 
 //localhost
-
+/*
 const pool = mariadb.createPool({
      
      host:'localhost', 
@@ -16,8 +16,8 @@ const pool = mariadb.createPool({
 
 );
 
+*/
 
-/*
 const pool = mariadb.createPool({
      host: 'process.env.DB_HOST', 
      database:'process.env.DB_NAME',
@@ -32,5 +32,5 @@ pool.getConnection()
     .catch(err => {
       console.log("not connected due to error: " + err);
     });
-    //*/
+  
 export default pool;
