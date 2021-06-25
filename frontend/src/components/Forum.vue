@@ -324,13 +324,15 @@ export default {
       { name: "Cryoresuscitation", code: "Cryoresuscitation" },
       { name: "Import", code: "Import" },
       { name: "Engineer", code: "Engineer" },
+      { name: "Other", code: "Other" }
     ]);
 
     const savePosting = async () => {
       submitted.value = true;
       if (forumPost.value.email.trim()) {
-        forumPost.value.needed = forumPost.value.needed.toDateString();
-        
+        if (forumPost.value.needed){
+          forumPost.value.needed = forumPost.value.needed.toDateString();
+        }
         forumPost.value.actions = forumPost.value.actions.value
           ? forumPost.value.actions.value
           : forumPost.value.actions;
