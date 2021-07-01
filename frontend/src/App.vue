@@ -5,7 +5,21 @@
         <h2 style="text-align:center">MOUSELIST where researchers can find collaborators with similar mouse needs and share costs.</h2>
 <h3 style="text-align:center">Didn't find what you're looking for? Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">Mouse Database</a>
 <img src='./assets/target_mice.png' class= "target-mice"></h3>
-    
+ 
+ 
+          <router-link
+            :to="{
+              name: 'Forum',
+            }">
+            <Button
+              label="Refresh Posts"
+              icon="pi pi-refresh"
+              class="p-button-success p-mr-2"
+              @click="refreshPosts"
+            />
+          </router-link>
+  
+
     <router-view />
   </div>
 </template>

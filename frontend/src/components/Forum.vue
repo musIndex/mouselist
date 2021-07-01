@@ -12,15 +12,17 @@
         <h4>
           Users can add a 'New Post' and 'Post Comment' on a post. Contact
           <a href="mailto:admin.mousedatabase@ucsf.edu">administrator</a> to
-          edit a Mouselist post.
+          request changes on Mouselist.
         </h4>
       </template>
     </Toolbar>
     <DataTable
       ref="dt"
       :value="forum"
+      removableSort
       :paginator="true"
       :rows="10"
+      :first="0"
       v-model:filters="filters1"
       dataKey="id"
       :loading="loading"
@@ -55,8 +57,12 @@
         field="details"
         header="Details"
         :sortable="true"
-        style="min-width: 16rem"
-      ></Column>
+        style="min-width: 16rem">
+         <template #body="{ data }" >
+           {{data.details}}
+           <a :href="`${data.links}`">{{data.links}}</a> 
+        </template>
+      </Column>
       <Column
         field="actions"
         header="Action"
@@ -84,8 +90,6 @@
               name: 'Posts',
               params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
             }">
-            
-          
           <CommentPosts ref="postComponent" />
           </router-link>
         </template>
@@ -116,7 +120,7 @@
               icon="pi pi-pencil"
               class="p-button-rounded p-button-success p-mr-2"
               @click="showDialog(id)" 
-              >Edit
+              >Post
             </Button>
           </router-link>
         </template>
@@ -179,6 +183,13 @@
         required="true"
         rows="3"
         cols="20"
+      />
+    </div>
+     <div class="p-field">
+      <label for="links">URL links (vendor stock pages)</label>
+      <InputText
+        id="links"
+        v-model.trim="forumPost.links"
       />
     </div>
 
@@ -275,7 +286,7 @@ export default {
   setup() {
     const baseURL = `${window.location.protocol}//${window.location.host}`;
 
-    onMounted(async () => {
+    onMounted(async() => {
       try {
         const { data } = await axios.get(`${baseURL}/api/forum`);
         console.log(baseURL);
@@ -319,6 +330,21 @@ export default {
       forumDialog.value = false;
       submitted.value = false;
     };
+    const refreshPosts = (async () =>{
+      try {
+        loading.value = true;
+        const { data } = await axios.get(`${baseURL}/api/forum`);
+        console.log(baseURL);
+        forum.value = data;
+        loading.value = false;
+      } catch (err) {
+        console.error(err);
+        console.log("error");
+        console.log(baseURL);
+      }
+    });
+    
+    
     const choices = ref([
       { name: "Purchase", code: "Purchase" },
       { name: "Cryoresuscitation", code: "Cryoresuscitation" },
@@ -379,7 +405,8 @@ export default {
       choices,
       details,
       filters1,
-      postComponent
+      postComponent,
+      refreshPosts
       
     };
   },
