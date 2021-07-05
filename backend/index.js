@@ -6,11 +6,12 @@ import Router from "./routes/routes.js";
 import express, { json } from 'express';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+//import history from 'connect-history-api-fallback';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-
+//app.use(history());
 app.use(json());
   
  // use router
@@ -19,6 +20,7 @@ app.use(Router);
 const path = __dirname + '/../frontend/dist/';
 
 app.use(express.static(path));
+
 
 var corsOptions = {
   origin: "http://localhost:8081"

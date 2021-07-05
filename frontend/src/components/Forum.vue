@@ -1,4 +1,5 @@
 <template>
+<div>
 <router-view />
   <div class="card">
     <Toolbar class="p-mb-4">
@@ -22,9 +23,8 @@
       removableSort
       :paginator="true"
       :rows="10"
-      :first="0"
       v-model:filters="filters1"
-      dataKey="id"
+      dataKey="posted"
       :loading="loading"
       :globalFilterFields="['mouse', 'details', 'contact']"
       responsiveLayout="scroll"
@@ -233,20 +233,7 @@
       />
     </template>
   </Dialog>
-  <Dialog
-    v-model:visible="deletePostDialog"
-    :style="{ width: '450px' }"
-    header="Confirm"
-    :modal="true"
-  >
-    <div class="confirmation-content">
-      <i class="pi pi-exclamation-triangle p-mr-3" style="font-size: 2rem" />
-      <span v-if="forum"
-        >Are you sure you want to delete <b>{{ forumPost.mouse }}</b
-        >?</span
-      >
-    </div>
-  </Dialog>
+  </div>
 </template>
 <script>
 import { ref, onMounted } from "vue";
@@ -316,8 +303,6 @@ export default {
     //const forumTable = ref(new ForumTable());
     const forumDialog = ref(false);
 
-    const deletePostDialog = ref(false);
-
     const actions = ref();
     var currentDate = new Date();
     var fixedDate = currentDate.toDateString();
@@ -330,19 +315,10 @@ export default {
       forumDialog.value = false;
       submitted.value = false;
     };
-    const refreshPosts = (async () =>{
-      try {
-        loading.value = true;
-        const { data } = await axios.get(`${baseURL}/api/forum`);
-        console.log(baseURL);
-        forum.value = data;
-        loading.value = false;
-      } catch (err) {
-        console.error(err);
-        console.log("error");
-        console.log(baseURL);
-      }
-    });
+    const refreshPosts = () => {
+      router.push("/api");
+    }
+    
     
     
     const choices = ref([
@@ -359,14 +335,16 @@ export default {
         if (forumPost.value.needed){
           forumPost.value.needed = forumPost.value.needed.toDateString();
         }
+        if (forumPost.value.actions){
         forumPost.value.actions = forumPost.value.actions.value
           ? forumPost.value.actions.value
           : forumPost.value.actions;
+        }
         forumPost.value.posted = fixedDate;
         //forum.value.push(forumPost.value);
         try {
           await axios.post(`${baseURL}/api/forumPost`, forumPost.value);
-          router.push("/");
+          router.push("/api");
         } catch (error) {
           console.log(error);
         }
@@ -394,7 +372,6 @@ export default {
       loading,
       openNew,
       hideDialog,
-      deletePostDialog,
       submitted,
       forumPost,
       forum,
