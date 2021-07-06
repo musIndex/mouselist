@@ -39,8 +39,12 @@
         field="user_comment"
         header="Comment"
         sortable
-        style="width: 50%"
-      ></Column>
+        style="width: 50%">
+        <template #body="{ data }" >
+           {{data.user_comment}}
+           <a :href="`${data.links}`">{{data.links}}</a> 
+        </template>
+      </Column>
       <Column
         field="email"
         header="Contact"

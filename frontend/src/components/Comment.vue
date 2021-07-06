@@ -28,6 +28,13 @@
       <label for="comment">Comment</label>
       <InputText id="comment" v-model.trim="forumComment.user_comment" />
     </div>
+    <div class="p-field">
+      <label for="links">URL link for resources</label>
+      <InputText
+        id="links"
+        v-model.trim="forumComment.links"
+      />
+    </div>
     <template #footer>
       <Button
         label="Cancel"
