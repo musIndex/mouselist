@@ -20,13 +20,13 @@
     <DataTable
       ref="dt"
       :value="forum"
+      dataKey="id"
       removableSort
       :paginator="true"
       :rows="10"
-      v-model:filters="filters1"
-      dataKey="posted"
+      :filters="filters1"
       :loading="loading"
-      :globalFilterFields="['mouse', 'details', 'contact']"
+      :globalFilterFields="['mouse', 'details']"
       responsiveLayout="scroll"
     >
       <template #header>
