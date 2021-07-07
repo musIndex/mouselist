@@ -25,7 +25,6 @@
       :paginator="true"
       :rows="10"
       :filters="filters1"
-      :loading="loading"
       :globalFilterFields="['mouse', 'details']"
       responsiveLayout="scroll"
     >
@@ -278,7 +277,6 @@ export default {
         const { data } = await axios.get(`${baseURL}/api/forum`);
         console.log(baseURL);
         forum.value = data;
-        loading.value = false;
       } catch (err) {
         console.error(err);
         console.log("error");
@@ -287,7 +285,6 @@ export default {
     });
     
     const router = useRouter();
-    const loading = ref(true);
     const forum = ref();
     const forumPost = ref({});
     
@@ -369,7 +366,6 @@ export default {
 
     return {
       dt,
-      loading,
       openNew,
       hideDialog,
       submitted,
