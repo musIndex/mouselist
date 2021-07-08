@@ -18,7 +18,7 @@
       </template>
     </Toolbar>
     <DataTable
-      ref="dt"
+    ref="dt"
       :value="forum"
       dataKey="id"
       removableSort
@@ -277,6 +277,7 @@ export default {
         const { data } = await axios.get(`${baseURL}/api/forum`);
         console.log(baseURL);
         forum.value = data;
+        
       } catch (err) {
         console.error(err);
         console.log("error");

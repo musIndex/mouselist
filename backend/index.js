@@ -2,36 +2,43 @@ import cors from "cors";
  // import routes
 import Router from "./routes/routes.js";
 // import express
-
 import express, { json } from 'express';
-import { dirname } from 'path';
+import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-//import history from 'connect-history-api-fallback';
-
+import history from 'connect-history-api-fallback';
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const path = __dirname + '/views/';
+const staticFileMiddleware = express.static(path);
+console.log("Service static files from path:" + path);
 
 const app = express();
-//app.use(history());
+app.use(express.urlencoded({ extended: true }))
 app.use(json());
-  
- // use router
-app.use(Router);
 
-const path = __dirname + '/../frontend/dist/';
+app.use(staticFileMiddleware);
 
-app.use(express.static(path));
+app.use(history({
+  verbose: true,
+  index: '/index.html'
+}));
+app.use(staticFileMiddleware);
 
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
 
-app.use(cors(corsOptions));
+//var corsOptions = {
+ // origin: "http://localhost:8081"
+//};
+
+//app.use(cors(corsOptions));
+app.use(cors);
 
 
 app.get('/', function (req,res) {
-  res.sendFile(path + "index.html");
+  res.sendFile(join(path, 'index.html'));
 });
+
+ // use router
+ app.use(Router);
 
 const port = process.env.PORT || 5000;
 app.listen( port, () => console.log(`Server running at port ${port}`));
