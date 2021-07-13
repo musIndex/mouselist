@@ -10,7 +10,7 @@
     aria:haspopup="true" 
     aria-controls="overlay_panel">
   </Button>
-  <teleport to="#comment-post">
+  
   <OverlayPanel
     ref="commentPanel"
     appendTo="body"
@@ -57,16 +57,14 @@
       </Column>
     </DataTable>
   </OverlayPanel>
-  </teleport>
+  
 </div>
 </template>
 <script>
 import { ref, watch, onMounted} from "vue";
-//import { useRoute } from 'vue-router';
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
 import axios from "axios";
-//import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
 
 export default {

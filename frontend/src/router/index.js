@@ -9,26 +9,25 @@ const routes = [
       path: '/api',
       component: Forum,
       props: true,
-        children: [
-          {
-            path: '/api/comment/:id',
-              name: 'Comment',
-              component: Comment,
-              props: true
-          },
-          {
-            path: '/api/posts/:id',
-              name: 'Posts',
-              component: Posts,
-              props: true
-          },
-        ]
-      }
+    children:[
+    {
+      path: '/api/comment/:id',
+      name: 'Comment',
+      component: Comment,
+      props: true
+    },
+    {
+      path: '/api/posts/:id',
+      name: 'Posts',
+      component: Posts,
+      props: true
+    }, 
+  ]
+  }  
   ]
 
   const router = createRouter({
     history: createWebHistory(),
     routes,
   });
-  
   export default router;

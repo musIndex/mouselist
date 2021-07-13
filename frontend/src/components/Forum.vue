@@ -18,15 +18,14 @@
       </template>
     </Toolbar>
     <DataTable
-    ref="dt"
       :value="forum"
       dataKey="id"
-      removableSort
       :paginator="true"
       :rows="10"
       :filters="filters1"
       :globalFilterFields="['mouse', 'details']"
       responsiveLayout="scroll"
+      :loading="loading"
     >
       <template #header>
         <div class="table-header" >
@@ -43,7 +42,6 @@
       <Column
         field="posted"
         header="Posted"
-        :sortable="true"
         style="min-width: 10rem"
       ></Column>
       <Column
@@ -65,13 +63,11 @@
       <Column
         field="actions"
         header="Action"
-        :sortable="true"
         style="min-width: 10rem"
       ></Column>
       <Column
         field="needed"
         header="Date Needed"
-        :sortable="true"
         style="min-width: 10rem"
       ></Column>
       <Column header="Notes" style="min-width: 16rem"  > 
@@ -235,7 +231,7 @@
   </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onBeforeMount} from "vue";
 import axios from "axios";
 import { FilterMatchMode } from "primevue/api";
 import "primeflex/primeflex.css";
@@ -249,7 +245,7 @@ export default {
   components: {
     CommentPosts,
   },
-  created() {
+  created(){
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
@@ -268,15 +264,15 @@ export default {
     invalidDate.setDate(today.getDate() - 1);
     this.invalidDates = [today, invalidDate];
   },
-
   setup() {
     const baseURL = `${window.location.protocol}//${window.location.host}`;
-
-    onMounted(async() => {
+    onBeforeMount(async() => {
       try {
         const { data } = await axios.get(`${baseURL}/api/forum`);
         console.log(baseURL);
         forum.value = data;
+        console.log(data);
+        loading.value = false;
         
       } catch (err) {
         console.error(err);
@@ -284,13 +280,11 @@ export default {
         console.log(baseURL);
       }
     });
-    
     const router = useRouter();
     const forum = ref();
     const forumPost = ref({});
-    
-    
-    const dt = ref();
+    const loading = ref();
+    //const dt = ref();
 
     const toast = useToast();
     const filters1 = ref({
@@ -314,7 +308,10 @@ export default {
       submitted.value = false;
     };
     const refreshPosts = () => {
+      window.location.reload();
       router.push("/api");
+      
+      console.log(window.location.host);
     }
     
     
@@ -366,7 +363,7 @@ export default {
     //provide('commentPanel', computed(() => commentPanel.value.toggle));
 
     return {
-      dt,
+      loading, 
       openNew,
       hideDialog,
       submitted,
