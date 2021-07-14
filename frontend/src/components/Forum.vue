@@ -82,6 +82,7 @@
       <template #body="slotProps" >
         <div id="comment-post"/>
           <router-link
+            style="text-decoration: none"
             :to="{
               name: 'Posts',
               params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
@@ -108,12 +109,13 @@
       <Column header="Post Comment">
         <template #body="slotProps" >
           <router-link
+            style="text-decoration: none"
             :to="{
               name: 'Comment',
               params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
             }">
             <Button
-              icon="pi pi-comments"
+              icon="pi pi-pencil"
               class="p-button-rounded p-button-success p-mr-2"
               @click="showDialog(id)" 
               >

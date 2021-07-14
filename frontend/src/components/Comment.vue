@@ -99,7 +99,7 @@ export default {
 
         axios.post(`${baseURL}/api/commentPost`, forumComment.value).then(
           (response) => {
-            router.push("/");
+            router.push("/api");
             console.log(response);
           },
           (error) => {
