@@ -7,15 +7,16 @@
         <Dialog header="About UCSF Mouselist" v-model:visible="aboutDialog" :style="{width: '50vw'}">
             <p>During initial COVID lab closures in 2020 and the subsequent months of reduced lab occupancy, many labs lost, 
             or chose not to maintain valuable mouse lines that would be needed when research activities return to normal levels.
+            The UCSF Mouse Inventory Database and LARC want to help rebuild valuable mouse strain colonies by facilitating 
+            communication between researchers with shared plans for new mouse orders, shipments, rederivation, new engineered 
+            lines and other needs. 
+            </p>
+            <p>
             We hope that this bulletin board resource can serve as a sort of “classified ad” that can facilitate the re-establishment
             of precious mouse strains while implementing the greater vision of the UCSF Mouse Inventory Database in connecting 
-            researchers and decreasing mouse costs.
+            researchers and decreasing costs through shared mice.
             </p>
-            <p>The UCSF Mouse Inventory Database and LARC want to help rebuild valuable mouse strain colonies by facilitating 
-            communication between researchers with shared plans for new mouse orders, shipments, and rederivation, new engineered 
-            lines and other needs. Through these new connections users can redefine plans for their colony and discuss mouse costs.
-            </p>
-            <p>Users can create a +New Post, contact the lab through linked emails, and provide comments on a POST (Post button).
+            <p>Users can create a New Post, contact the lab through linked emails, and provide comments on a POST (Post button).
             For New Post the following types of ACTION along with resource links and purchase deadlines can be listed.
             <br><br>
             <br><b>Purchase</b> mice strain name with vendor stock#<br>
@@ -33,9 +34,9 @@
               name: 'Forum',
             }">
             <Button
-              label="Refresh Posts"
-              icon="pi pi-refresh"
-              class="p-button-success p-mr-2"
+              label="Posts"
+              icon="pi pi-flag"
+              class="p-button-rounded"
               @click="refreshPosts"
             />
           </router-link>

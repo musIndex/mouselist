@@ -3,9 +3,9 @@
   
   <Button
     type="button"
-    icon="pi pi-search"
+    icon="pi pi-comments"
     showCloseIcon ="true"
-    label="View Comments"
+    label=""
     @click="toggle($event, id)"
     aria:haspopup="true" 
     aria-controls="overlay_panel">

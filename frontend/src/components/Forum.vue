@@ -64,6 +64,7 @@
         field="actions"
         header="Action"
         style="min-width: 10rem"
+        :sortable="true"
       ></Column>
       <Column
         field="needed"
@@ -76,7 +77,7 @@
            
         </template>
       </Column>
-      <Column  header="User comments"
+      <Column  header="Comments"
       >
       <template #body="slotProps" >
         <div id="comment-post"/>
@@ -112,10 +113,10 @@
               params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
             }">
             <Button
-              icon="pi pi-pencil"
+              icon="pi pi-comments"
               class="p-button-rounded p-button-success p-mr-2"
               @click="showDialog(id)" 
-              >Post
+              >
             </Button>
           </router-link>
         </template>
@@ -166,7 +167,7 @@
         :class="{ 'p-invalid': submitted && !forumPost.mouse }"
       />
       <small class="p-error" v-if="submitted && !forumPost.mouse"
-        >Mouse name is required.</small
+        >Mouse name is required or list Other Need.</small
       >
     </div>
 
@@ -181,7 +182,7 @@
       />
     </div>
      <div class="p-field">
-      <label for="links">URL links (vendor stock pages)</label>
+      <label for="links">URL links (vendor stock or resources)</label>
       <InputText
         id="links"
         v-model.trim="forumPost.links"
