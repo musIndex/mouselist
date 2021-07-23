@@ -2,12 +2,15 @@
   <div id="app" class="container is-max-desktop">
      <Toolbar class="ucsf-toolbar" style="background-color:#052049; " >
       <template #left >
-         <button class="ucsf-header" @click="redirect('http://www.ucsf.edu')">University of California San Francisco</button>
+         <img src='./assets/UCSF_Logo_21_White_300dpi_RGB.png' class= "ucsf-logo">
+         <button class="ucsf-header" style="padding-left:15px" @click="redirect('http://www.ucsf.edu')">University of California San Francisco</button>
         </template>
         <template #right>
-          <button class="ucsf-header" @click="redirect('http://www.ucsfhealth.org/')">UCSF Health</button>
-          <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/search')" title="">Search UCSF</button>
+         
           <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/about')">About UCSF</button>
+          <button class="ucsf-header" @click="redirect('http://mousedatabase.ucsf.edu')">Mouse Database</button>
+          <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/search')" title="">Search UCSF</button>
+          <button class="ucsf-header" @click="redirect('http://www.ucsfhealth.org/')">UCSF Health</button>
         </template>
     </Toolbar>
         <h2 style="text-align:center">MOUSELIST where UCSF researchers can find collaborators with similar mouse needs and share costs.</h2>
@@ -55,7 +58,7 @@
     <router-view />
      <Toolbar style="background-color:#052049; padding:none;" >
       <template #left>
-         <p style="color:#FFF; padding:none; font-size: 14px">© 2021 The Regents of the University of California</p>
+         <p style="color:#FFF;  font-size: 14px">© 2021 The Regents of the University of California</p>
         </template>
         <template #right>
           <button class="ucsf-header" @click="redirect('mailto:admin.mousedatabase@ucsf.edu')">Contact Us</button>
@@ -113,10 +116,13 @@ export default {
 .target-mice {
     width: 90px;
 }
+.ucsf-logo {
+    width: 45px;
+    
+}
 .ucsf-header{
   background-color:#052049;
   border: none;
-  padding:none;
   color:#FFF;
   font-size: 14px;
   cursor: pointer;
