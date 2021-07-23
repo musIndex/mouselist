@@ -6,6 +6,7 @@
     icon="pi pi-comments"
     showCloseIcon ="true"
     label=""
+    style="background-color:#178CCB"
     @click="toggle($event, id)"
     aria:haspopup="true" 
     aria-controls="overlay_panel">

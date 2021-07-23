@@ -7,6 +7,7 @@
         <Button
           label="New Post"
           icon="pi pi-plus"
+          style="background-color:#90BD31"
           class="p-button-success p-mr-2"
           @click="openNew"
         />
@@ -116,6 +117,7 @@
             }">
             <Button
               icon="pi pi-pencil"
+              style="background-color:#90BD31"
               class="p-button-rounded p-button-success p-mr-2"
               @click="showDialog(id)" 
               >
