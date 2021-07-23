@@ -1,5 +1,15 @@
 <template>
   <div id="app" class="container is-max-desktop">
+     <Toolbar style="background-color:#052049; padding:none;" >
+      <template #left>
+         <button class="ucsf-header" @click="redirect('http://www.ucsf.edu')">University of California San Francisco</button>
+        </template>
+        <template #right>
+          <button class="ucsf-header" @click="redirect('http://www.ucsfhealth.org/')">UCSF Health</button>
+          <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/search')" title="">Search UCSF</button>
+          <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/about')">About UCSF</button>
+        </template>
+    </Toolbar>
         <h2 style="text-align:center">MOUSELIST where UCSF researchers can find collaborators with similar mouse needs and share costs.</h2>
 <h3 style="text-align:center">Didn't find what you're looking for? Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">UCSF Mouse Database</a>
 <img src='./assets/target_mice.png' class= "target-mice"></h3>
@@ -12,8 +22,8 @@
             lines and other needs. 
             </p>
             <p>
-            We hope that this bulletin board resource can serve as a sort of “classified ad” that can facilitate the re-establishment
-            of precious mouse strains while implementing the greater vision of the UCSF Mouse Inventory Database in connecting 
+            We hope that this bulletin board resource can serve as a sort of “classified ad.” Through facilitating the re-establishment
+            of precious mouse strains, it supports the greater vision of the UCSF Mouse Inventory Database in connecting 
             researchers and decreasing costs through shared mice.
             </p>
             <p>Users can create a New Post, contact the lab through linked emails, and provide Comments on a Post.
@@ -41,9 +51,19 @@
               @click="refreshPosts"
             />
           </router-link>
-  
-
     <router-view />
+     <Toolbar style="background-color:#052049; padding:none;" >
+      <template #left>
+         <p style="color:#FFF; padding:none; font-size: 14px">© 2021 The Regents of the University of California</p>
+        </template>
+        <template #right>
+          <button class="ucsf-header" @click="redirect('mailto:admin.mousedatabase@ucsf.edu')">Contact Us</button>
+          <button class="ucsf-header" @click="redirect('https://websites.ucsf.edu/digital-accessibility')">Accessibility</button>
+          <button class="ucsf-header" @click="redirect('https://www.ucsf.edu/website-privacy-policy')">Privacy Policy</button>
+          <button class="ucsf-header" @click="redirect('https://websites.ucsf.edu/website-terms-use')">Terms of Use</button>
+          <button class="ucsf-header" @click="redirect('https://websites.ucsf.edu/azlist')">A-Z Website List</button>
+        </template>
+    </Toolbar>
   </div>
 </template>
  
@@ -54,13 +74,16 @@ export default {
 
    setup() {
      const aboutDialog = ref(false);
-      
+     const redirect = (link) =>{
+       let target = 'blank';
+       window.open(link, target);
+     }; 
 
         
          const openAbout = () => {
             aboutDialog.value = true;
          };
-   return {aboutDialog, openAbout};
+   return {aboutDialog, openAbout, redirect};
   },
 };
 </script>
@@ -71,7 +94,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+  
 }
 .app-container {
   text-align: center;
@@ -88,5 +111,11 @@ export default {
 }
 .target-mice {
     width: 90px;
+}
+.ucsf-header{
+  background-color:#052049;
+  border: none;
+  color:#FFF;
+  font-size: 14px;
 }
 </style>
