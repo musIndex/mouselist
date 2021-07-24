@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container is-max-desktop">
-     <Toolbar class="ucsf-toolbar" style="background-color:#052049; " >
+     <Toolbar class="ucsf-toolbar" style="background-color:#052049; padding-top:7px !important; padding-bottom:7px !important; " >
       <template #left >
          <img src='./assets/UCSF_Logo_21_White_300dpi_RGB.png' class= "ucsf-logo">
          <button class="ucsf-header" style="padding-left:15px" @click="redirect('http://www.ucsf.edu')">University of California San Francisco</button>
@@ -8,15 +8,14 @@
         <template #right>
          
           <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/about')">About UCSF</button>
-          <button class="ucsf-header" @click="redirect('http://mousedatabase.ucsf.edu')">Mouse Database</button>
           <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/search')" title="">Search UCSF</button>
           <button class="ucsf-header" @click="redirect('http://www.ucsfhealth.org/')">UCSF Health</button>
         </template>
     </Toolbar>
-        <h2 style="text-align:center">MOUSELIST where UCSF researchers can find collaborators with similar mouse needs and share costs.</h2>
+        <h2 style="text-align:center">UCSF MOUSELIST where researchers can find collaborators with similar mouse needs and share costs.</h2>
 <h3 style="text-align:center">Didn't find what you're looking for? Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">UCSF Mouse Database</a>
 <img src='./assets/target_mice.png' class= "target-mice"></h3>
-        <Button label="About" style="background-color:#178CCB" icon="pi pi-external-link" class="p-button-rounded" @click="openAbout()" />
+        <Button label="About" style="background-color:#178CCB; margin-left: 8px" icon="pi pi-external-link" class="p-button-rounded" @click="openAbout()" />
         <Dialog position= "topright" header="About UCSF Mouselist" v-model:visible="aboutDialog" :style="{width: '50vw'}">
             <p>During initial COVID lab closures in 2020 and the subsequent months of reduced lab occupancy, many labs lost, 
             or chose not to maintain valuable mouse lines that would be needed when research activities return to normal levels.
@@ -56,7 +55,7 @@
             />
           </router-link>
     <router-view />
-     <Toolbar style="background-color:#052049; padding:none;" >
+     <Toolbar style="background-color:#052049; padding-top:0px !important; padding-bottom:0px !important;" >
       <template #left>
          <p style="color:#FFF;  font-size: 14px">© 2021 The Regents of the University of California</p>
         </template>
@@ -98,6 +97,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  margin: 0px !important;
   
 }
 .app-container {
@@ -128,7 +128,5 @@ export default {
   cursor: pointer;
   
 }
-.ucsf-toolbar{
-  
-}
+
 </style>
