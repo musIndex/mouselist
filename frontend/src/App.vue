@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container is-max-desktop">
-     <Toolbar class="ucsf-toolbar" style="background-color:#052049; padding-top:7px !important; padding-bottom:7px !important; " >
+     <Toolbar class="ucsf-toolbar" style="background-color:#052049; padding-left:105px; padding-right:105px; padding-top:7px !important; padding-bottom:7px !important; " >
       <template #left >
          <img src='./assets/UCSF_Logo_21_White_300dpi_RGB.png' class= "ucsf-logo">
          <button class="ucsf-header" style="padding-left:15px" @click="redirect('http://www.ucsf.edu')">University of California San Francisco</button>
@@ -16,14 +16,15 @@
          <h2 style="font-family:Arial; font-size:26px; color:#052049">UCSF Mouselist</h2>
         </template>
         <template #right>
+          <button class="ucsf-nav" @click="openAbout()">About</button>
           <button class="ucsf-nav" @click="redirect('http://mousedatabase.ucsf.edu')">Mouse Inventory</button>
           <button class="ucsf-nav" @click="redirect('https://larc.ucsf.edu')" >LARC</button>
         </template>
     </Toolbar>
-        <h2 style="text-align:center">MOUSELIST where researchers find collaborators with similar mouse needs and share costs.</h2>
+        <h2 style="text-align:center">MOUSELIST where researchers find collaborators with similar mouse needs and share costs</h2>
 <h3 style="text-align:center">Didn't find what you're looking for? Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">UCSF Mouse Inventory Database</a>
 <img src='./assets/target_mice.png' class= "target-mice"></h3>
-        <Button label="About" style="background-color:#178CCB; margin-left: 8px" icon="pi pi-external-link" class="p-button-rounded" @click="openAbout()" />
+        <Button label="About" style="background-color:#178CCB; margin-left: 16px; margin-bottom: 8px !important;" icon="pi pi-external-link" class="p-button-rounded" @click="openAbout()" />
         <Dialog position= "topright" header="About UCSF Mouselist" v-model:visible="aboutDialog" :style="{width: '50vw'}">
             <p>During initial COVID lab closures in 2020 and the subsequent months of reduced lab occupancy, many labs lost, 
             or chose not to maintain valuable mouse lines that would be needed when research activities return to normal levels.
@@ -33,10 +34,11 @@
             </p>
             <p>
             We hope that this bulletin board resource can serve as a sort of “classified ad.” Through facilitating the re-establishment
-            of precious mouse strains, it supports the greater vision of the UCSF Mouse Inventory Database in connecting 
-            researchers and decreasing costs through shared mice.
+            of precious mouse strains the greater vision of the UCSF Mouse Inventory Database is supported by connecting 
+            researchers and decreasing costs through shared mice. Upon acquiring mice, please consider listing on
+            <a href="https://mousedatabase.ucsf.edu/search.jsp">https://mousedatabase.ucsf.edu</a>, use @ucsf.edu email for login.
             </p>
-            <p>Users can create a New Post, contact the lab through linked emails, and provide Comments on a Post.
+            <p>Click on <b>Posts</b>. Users can create a New Post, contact the lab through linked emails, and provide Comments on a Post.
             For a New Post the following types of ACTION along with resource link and purchasing deadline can be listed.
             <br><br>
             <br><b>Purchase</b> mice strain name with vendor stock#<br>
@@ -57,7 +59,7 @@
             <Button
               label="Posts"
               icon="pi pi-flag"
-              style="background-color:#178CCB; margin-left: 8px"
+              style="background-color:#178CCB; margin-left: 8px; margin-bottom: 8px !important;"
               class="p-button-rounded"
               @click="refreshPosts"
             />
