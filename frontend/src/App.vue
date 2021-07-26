@@ -22,7 +22,7 @@
         </template>
     </Toolbar>
         <h2 style="text-align:center">MOUSELIST where researchers find collaborators with similar mouse needs and share costs</h2>
-<h3 style="text-align:center">Didn't find what you're looking for? Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">UCSF Mouse Inventory Database</a>
+<h3 style="text-align:center">Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">UCSF Mouse Inventory Database</a> for mutant mice on campus
 <img src='./assets/target_mice.png' class= "target-mice"></h3>
         <Button label="About" style="background-color:#178CCB; margin-left: 16px; margin-bottom: 8px !important;" icon="pi pi-external-link" class="p-button-rounded" @click="openAbout()" />
         <Dialog position= "topright" header="About UCSF Mouselist" v-model:visible="aboutDialog" :style="{width: '50vw'}">
@@ -139,13 +139,20 @@ export default {
   pointer-events:auto;
   
 }
+.ucsf-nav:hover{
+  text-decoration:underline;
+  color:#052049;
+  border: none;
+  background-color:#FFF;
+  font-size: 16px;
+  cursor: pointer;
+}
 .ucsf-nav{
   color:#052049;
   border: none;
   background-color:#FFF;
   font-size: 14px;
   cursor: pointer;
-  pointer-events: auto;
 }
 
 </style>
