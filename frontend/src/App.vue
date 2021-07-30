@@ -46,7 +46,7 @@
             <br><b>Import</b> mice strain from other Institute<br>
             <br><b>Engineer</b> mutant mouse in house or from vendor<br>
             <br><b>Other</b> any mouse related need (genotyping protocols, colony help wanted)<br>
-            <br>Please Contact <a href="mailto:admin.mousedatabase@ucsf.edu">admin@mousedatabase.ucsf.edu</a> for UCSF Mouselist help.<br>
+            <br>Please Contact <a href="mailto:admin.mousedatabase@ucsf.edu">admin.mousedatabase@ucsf.edu</a> for UCSF Mouselist help.<br>
             </p>
         </Dialog>
         
