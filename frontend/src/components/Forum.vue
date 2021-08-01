@@ -113,7 +113,7 @@
             style="text-decoration: none"
             :to="{
               name: 'Comment',
-              params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
+              params: {mouse: slotProps.data.mouse, id: slotProps.data.id, email: slotProps.data.email }
             }">
             <Button
               icon="pi pi-pencil"

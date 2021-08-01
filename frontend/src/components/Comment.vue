@@ -10,17 +10,18 @@
   >
     <div id='mouse' class="p-field"  >
       <h4>Mouse Name: {{mouse}}</h4>
+      <h5>{{email}} will recieve an email with your comment.</h5>
     </div>
     <div class="p-field">
-      <label for="email">Your Email</label>
+      <label for="user_email">Your Email</label>
       <InputText
-        id="email"
-        v-model.trim="forumComment.email"
+        id="user_email"
+        v-model.trim="forumComment.user_email"
         required="true"
         autofocus
-        :class="{ 'p-invalid': submitted && !forumComment.email }"
+        :class="{ 'p-invalid': submitted && !forumComment.user_email }"
       />
-      <small class="p-error" v-if="submitted && !forumComment.email"
+      <small class="p-error" v-if="submitted && !forumComment.user_email"
         >Email is required.</small
       >
     </div>
@@ -64,7 +65,7 @@ import { useRouter } from "vue-router";
 import { useRoute } from 'vue-router';
 
 export default {
-  props: ['mouse', 'id'],
+  props: ['mouse', 'id', 'email'],
   setup() {
     const route = useRoute();
     const forumComment = ref({});
@@ -92,9 +93,11 @@ export default {
     const baseURL = `${window.location.protocol}//${window.location.host}`;  
     const saveComment = async () => {
       submitted.value = true;
-      if (forumComment.value.email.trim()) {
+      if (forumComment.value.user_email.trim()) {
         forumComment.value.posted = fixedDate;
         forumComment.value.post_id = route.params.id;
+        forumComment.value.mouse = route.params.mouse;
+        forumComment.value.email = route.params.email;
         //forumComment.value.mouseID = id;
 
         axios.post(`${baseURL}/api/commentPost`, forumComment.value).then(

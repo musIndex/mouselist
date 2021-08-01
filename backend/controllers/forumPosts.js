@@ -1,5 +1,5 @@
 import { sendEmailConfirmation } from "../models/email.js";
-import { getForumList, getCommentList, insertForumPost, insertCommentPost, getForumEmail } from "../models/postModel.js";
+import { getForumList, getCommentList, insertForumPost, insertCommentPost } from "../models/postModel.js";
 
 // Get forum post
 export const showForumPost = (req, res) => {
@@ -42,10 +42,12 @@ export const createForumPost = (req, res) => {
 // Create new comment post
 export const createCommentPost = (req, res) => {
     const data = req.body;
-    var mouseID = data.post_id;
-    var user = data.email;
+    var user = data.user_email;
     var links = data.links;
     var comment = data.user_comment;
+    var forumEmail = data.email;
+    var mouse = data.mouse;
+    console.log('got new comment request')
     insertCommentPost(data, (err, results) => {
         if (err){
             res.send(err);
@@ -53,17 +55,7 @@ export const createCommentPost = (req, res) => {
             res.json(results);
         }
     });
-    getForumEmail(mouseID, (err,results)=> {
-        console.log(mouseID);
-        console.log("got comment post request");
-        if (err){
-            res.send(err);
-        }else{
-           var forumEmail = res.json(results.email);
-           var mouse = res.json(results.mouse);
-        }
     
     sendEmailConfirmation(user, links, comment, forumEmail, mouse);
-});
-    
 }
+    

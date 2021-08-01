@@ -47,13 +47,13 @@
         </template>
       </Column>
       <Column
-        field="email"
+        field="user_email"
         header="Contact"
         sortable
         style="width: 50%"
       >
       <template #body="{ data }">
-        <a :href="`mailto:${data.email}`">{{ data.email }}</a>
+        <a :href="`mailto:${data.user_email}`">{{ data.user_email }}</a>
       </template>
       </Column>
     </DataTable>
