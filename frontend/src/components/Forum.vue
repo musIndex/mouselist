@@ -108,12 +108,12 @@
         </template>
       </Column>
       <Column header="Post Comment">
-        <template #body="slotProps" >
+        <template #body="{ data }" >
           <router-link
             style="text-decoration: none"
             :to="{
               name: 'Comment',
-              params: {mouse: slotProps.data.mouse, id: slotProps.data.id, email: slotProps.data.email }
+              params: {mouse: data.mouse, id: data.id, email: data.email }
             }">
             <Button
               icon="pi pi-pencil"
