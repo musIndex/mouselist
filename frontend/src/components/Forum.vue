@@ -21,6 +21,8 @@
     <DataTable
       :value="forum"
       dataKey="id"
+      sortField="id" 
+      :sortOrder="-1"
       :paginator="true"
       :rows="10"
       :filters="filters1"
@@ -136,7 +138,7 @@
     class="p-fluid"
   >
     <div class="p-field">
-      <label for="email">Email</label>
+      <label for="email">Your Email</label>
       <InputText
         id="email"
         v-model.trim="forumPost.email"
@@ -162,7 +164,7 @@
       >
     </div>
     <div class="p-field">
-      <label for="mouse">Mouse Name</label>
+      <label for="mouse">Mouse Name or Help Wanted</label>
       <InputText
         id="mouse"
         v-model.trim="forumPost.mouse"
@@ -170,13 +172,14 @@
         autofocus
         :class="{ 'p-invalid': submitted && !forumPost.mouse }"
       />
+      <small id ="mouse-help">Mouse genes or help wanted</small>
       <small class="p-error" v-if="submitted && !forumPost.mouse"
-        >Mouse name is required or list Other Need.</small
+        >Mouse name is required or list help wanted.</small
       >
     </div>
 
     <div class="p-field">
-      <label for="details">Mouse Details (Vendor, Stock #, or mutation description)</label>
+      <label for="details">Mouse Details or Description of Need</label>
       <Textarea
         id="details"
         v-model="forumPost.details"
@@ -184,13 +187,15 @@
         rows="3"
         cols="20"
       />
+      <small id ="details-help">For mouse include vendor and stock # or mutation description</small>
     </div>
      <div class="p-field">
-      <label for="links">URL links (vendor stock or resources)</label>
+      <label for="links">Include URL link</label>
       <InputText
         id="links"
         v-model.trim="forumPost.links"
       />
+      <small id ="links-help">Starts with "http" for vendor stock page, MGI page or web resource</small>
     </div>
 
     <div class="p-field">
