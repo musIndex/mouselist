@@ -1,13 +1,6 @@
 
 import App from './App.vue'
 import router from './router'
-//import router from '../backend/routes/routes'
-//import VueRouter from 'vue-router'
-
-//import Forum from './components/Forum.vue'
-//import Comment from './components/Comment.vue'
-//import { createRouter } from "vue-router";
-
 import { createApp } from 'vue'
 import PrimeVue from 'primevue/config';
 import InputText from 'primevue/inputtext';
@@ -25,7 +18,7 @@ import Toolbar from 'primevue/toolbar';
 import Dialog from 'primevue/dialog';
 import Textarea from 'primevue/textarea';
 import OverlayPanel from 'primevue/overlaypanel';
-
+import RadioButton from 'primevue/radiobutton';
 import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
@@ -34,8 +27,6 @@ import 'primeicons/primeicons.css';
 const app = createApp(App);
 //Vue.config.productionTip = false;
 
-
-//const router = new VueRouter({ mode: 'history', routes: routes });
 app.use(PrimeVue);
 app.use(PrimeVue, FilterMatchMode.CONTAINS);
 app.use(ToastService);
@@ -77,6 +68,7 @@ app.component('Column', Column);
 app.component('ColumnGroup', ColumnGroup);
 app.component('Textarea', Textarea);
 app.component('OverlayPanel', OverlayPanel);
+app.component('RadioButton', RadioButton);
 app.component('Mouse',{
     props: ['mouse', 'id', 'commentPanel'],
     template:`<h4>{{ mouse }}</h4>`

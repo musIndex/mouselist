@@ -176,7 +176,7 @@
     </div>
 
     <div class="p-field">
-      <label for="details">Mouse Details (Stock #, mutation description)</label>
+      <label for="details">Mouse Details (Vendor, Stock #, or mutation description)</label>
       <Textarea
         id="details"
         v-model="forumPost.details"
@@ -204,13 +204,21 @@
         placeholder="Select an Action"
       />
     </div>
-    <div class="p-field">
-      <label for="needed">Date Needed</label>
+     <div class="p-field">
+         <label for="needed">Select date needed, ASAP or No Date</label>
+        <div class = "p-field-radiobutton">
+        <RadioButton id="asap" name="needed" value="ASAP" v-model="forumPost.needed"/>
+        <label for="asap">ASAP</label>
+        </div>
+        <div class = "p-field-radiobutton">
+        <RadioButton id="none" name="needed" value="No Date" v-model="forumPost.needed"/>
+        <label for="none">No Date</label>
+        </div>
       <Calendar
         v-model="forumPost.needed"
         dateFormat="mm-dd-yy"
         id="date"
-        placeholder="Date needed or none"
+        placeholder="Select Date Needed"
       />
     </div>
 
@@ -290,7 +298,7 @@ export default {
     const forumPost = ref({});
     const loading = ref();
     //const dt = ref();
-
+    const needed = ref();
     const toast = useToast();
     const filters1 = ref({
       global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -332,8 +340,8 @@ export default {
     const savePosting = async () => {
       submitted.value = true;
       if (forumPost.value.email.trim()) {
-        if (forumPost.value.needed){
-          forumPost.value.needed = forumPost.value.needed.toDateString();
+        if ((forumPost.value.needed !== "No Date") && (forumPost.value.needed !=="ASAP")){
+        forumPost.value.needed = forumPost.value.needed.toDateString();
         }
         if (forumPost.value.actions){
         forumPost.value.actions = forumPost.value.actions.value
@@ -341,21 +349,34 @@ export default {
           : forumPost.value.actions;
         }
         forumPost.value.posted = fixedDate;
-        //forum.value.push(forumPost.value);
+      
         try {
           await axios.post(`${baseURL}/api/forumPost`, forumPost.value);
           router.push("/api");
         } catch (error) {
           console.log(error);
         }
-        forum.value.push(forumPost.value);
-        toast.add({
+        //forum.value.push(forumPost.value);
+        try {
+        loading.value = true;  
+        const { data } = await axios.get(`${baseURL}/api/forum`);
+        console.log(baseURL);
+        forum.value = data;
+        console.log(data);
+        loading.value = false; 
+      } catch (err) {
+        console.error(err);
+        console.log("error");
+        console.log(baseURL);
+      }
+       toast.add({
           severity: "success",
           summary: "Successful",
           detail: "Post Added",
           life: 3000,
-        });
+        });  
       }
+    
       forumDialog.value = false;
       forumPost.value = {};
     };
@@ -364,12 +385,10 @@ export default {
     const calendar = ref();
     const postComponent = ref(null);
 
-        //get rid of provide
-    //provide('commentPanel', computed(() => commentPanel.value.toggle));
-
     return {
       loading, 
       openNew,
+      needed,
       hideDialog,
       submitted,
       forumPost,
