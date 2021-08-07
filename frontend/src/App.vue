@@ -21,31 +21,33 @@
           <button class="ucsf-nav" @click="redirect('https://larc.ucsf.edu')" >LARC</button>
         </template>
     </Toolbar>
-        <h2 style="text-align:center">MOUSELIST where researchers find collaborators with similar mouse needs and share costs</h2>
+        <h2 style="text-align:center">MOUSELIST where researchers find collaborators with similar animal needs and share costs</h2>
 <h3 style="text-align:center">Search the <a href="https://mousedatabase.ucsf.edu/search.jsp">UCSF Mouse Inventory Database</a> for mutant mice on campus
 <img src='./assets/target_mice.png' class= "target-mice"></h3>
         <Button label="About" style="background-color:#178CCB; margin-left: 16px; margin-bottom: 8px !important;" icon="pi pi-external-link" class="p-button-rounded" @click="openAbout()" />
         <Dialog position= "topright" header="About UCSF Mouselist" v-model:visible="aboutDialog" :style="{width: '50vw'}">
             <p>During initial COVID lab closures in 2020 and the subsequent months of reduced lab occupancy, many labs lost, 
             or chose not to maintain valuable mouse lines that would be needed when research activities return to normal levels.
-            The UCSF Mouse Inventory Database and LARC want to help rebuild valuable mouse strain colonies by facilitating 
+            The <mark>UCSF Mouse Inventory Database</mark> and <mark>LARC</mark> want to help rebuild valuable mouse strain colonies by facilitating 
             communication between researchers with shared plans for new mouse orders, shipments, rederivation, new engineered 
-            lines and other needs. 
+            lines and other needs. This resource is <i>user driven</i> and <i>private</i> for UCSF only. We welcome animal researchers to post 
+            any <b>organism</b> needs. 
             </p>
             <p>
             We hope that this bulletin board resource can serve as a sort of “classified ad.” Through facilitating the re-establishment
             of precious mouse strains the greater vision of the UCSF Mouse Inventory Database is supported by connecting 
-            researchers and decreasing costs through shared mice. Upon acquiring mice, please consider listing on
+            researchers and decreasing animal costs. Upon acquiring mice, please consider listing on
             <a href="https://mousedatabase.ucsf.edu/search.jsp">https://mousedatabase.ucsf.edu</a>, use @ucsf.edu email for login.
             </p>
             <p>Click on <b>Posts</b>. Users can create a New Post, contact the lab through linked emails, and provide Comments on a Post.
-            For a New Post the following types of ACTION along with resource link and purchasing deadline can be listed.
+            For a New Post the following types of ACTION along with resource link and purchasing deadline can be listed. *Please specify
+            organism if not mouse.
             <br><br>
-            <br><b>Purchase</b> mice strain name with vendor stock#<br>
+            <br><b>Purchase</b> animal strain name with vendor stock#<br>
             <br><b>Cryoresuscitation</b> plans for resuscitation or freezing<br>
-            <br><b>Import</b> mice strain from other Institute<br>
-            <br><b>Engineer</b> mutant mouse in house or from vendor<br>
-            <br><b>Other</b> any mouse related need (genotyping protocols, colony help wanted)<br>
+            <br><b>Import</b> animal strain from other Institute<br>
+            <br><b>Engineer</b> animal in house or from vendor<br>
+            <br><b>Other</b> colony help wanted, technical advice (genotyping protocol help)<br>
             <br>Please Contact <a href="mailto:admin.mousedatabase@ucsf.edu">admin.mousedatabase@ucsf.edu</a> for UCSF Mouselist help.<br>
             </p>
         </Dialog>

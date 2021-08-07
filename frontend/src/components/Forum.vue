@@ -82,13 +82,13 @@
       </Column>
       <Column  header="Comments"
       >
-      <template #body="slotProps" >
+      <template #body="{data}" >
         <div id="comment-post"/>
           <router-link
             style="text-decoration: none"
             :to="{
               name: 'Posts',
-              params: {mouse: slotProps.data.mouse, id: slotProps.data.id }
+              params: {mouse: data.mouse, id: data.id }
             }">
           <CommentPosts ref="postComponent" />
           </router-link>
