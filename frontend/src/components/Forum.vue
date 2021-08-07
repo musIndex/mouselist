@@ -172,7 +172,7 @@
         autofocus
         :class="{ 'p-invalid': submitted && !forumPost.mouse }"
       />
-      <small id ="mouse-help">Mouse genes or help wanted</small>
+      <small id ="mouse-help">Genes mutated & specify organism (if not mouse), or list 'help wanted'</small>
       <small class="p-error" v-if="submitted && !forumPost.mouse"
         >Mouse name is required or list help wanted.</small
       >
@@ -187,7 +187,7 @@
         rows="3"
         cols="20"
       />
-      <small id ="details-help">For mouse include vendor and stock # or mutation description</small>
+      <small id ="details-help">For organism include vendor and stock # or mutation description</small>
     </div>
      <div class="p-field">
       <label for="links">Include URL link</label>

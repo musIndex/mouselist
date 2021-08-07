@@ -35,7 +35,7 @@
             </p>
             <p>
             We hope that this bulletin board resource can serve as a sort of “classified ad.” Through facilitating the re-establishment
-            of precious mouse strains the greater vision of the UCSF Mouse Inventory Database is supported by connecting 
+            of precious strains the greater vision of the UCSF Mouse Inventory Database is supported by connecting 
             researchers and decreasing animal costs. Upon acquiring mice, please consider listing on
             <a href="https://mousedatabase.ucsf.edu/search.jsp">https://mousedatabase.ucsf.edu</a>, use @ucsf.edu email for login.
             </p>
