@@ -31,7 +31,7 @@ For Mac users, you can install dependencies using Homebrew
 
 ## Configuring the MariaDB database
 
-_Using same db as mouseinventory respository_
+_Using same db as_ [mouseinventory repository](https://github.com/musIndex/mouseinventory)
 
 Database configuration located in backend> config> database.js
 
