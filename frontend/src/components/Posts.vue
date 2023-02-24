@@ -26,6 +26,7 @@
     <DataTable
       :value="comment"
       :paginator="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
       :rows="5"
       responsiveLayout="scroll"
       :loading="loading"
