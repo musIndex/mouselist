@@ -26,10 +26,12 @@
     <DataTable
       :value="comment"
       :paginator="true"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
       :rows="5"
-      responsiveLayout="scroll"
+      paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+      :rowsPerPageOptions="[10,20,50]" responsiveLayout="scroll"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
       :loading="loading"
+      
     >
       <Column
         field="posted"
