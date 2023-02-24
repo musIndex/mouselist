@@ -1,32 +1,43 @@
 # mouselist
 
-### This forum enables users to make a post that users can comment on. Comments will generate an automatic email notification to the user who made original post.
 
-**The forum is intended for users at an institute to communicate mouse needs and share technical advice.**
+**Mouselist is intended for users at an institute to communicate mouse needs and share technical advice.**
 
-This forum was designed using Vue3 framework using Composition API with PrimeVue components.
+### This forum enables users to make a post that users can comment on. 
+
+### Comments will generate an automatic email notification to the user who made original post.
+
+
+---
+---
+### This forum was designed using Vue3 framework using Composition API with PrimeVue components. 
+#### The app consists of a Vue frontend and Node/Express backend, with the frontend packaged into the backend to be served on a single port.
+
 
 Requirements: NodeJS, Express JS, MariaDB, SMTP email account (Sendgrid)
 
+
+
 The application was tested using Node.js v19.6.1 , mariadb v10.10.3, Express v4.17.1
 
-The app consists of a Vue frontend and Node/Express backend, with the frontend packaged into the backend to be served on a single port.
 
 For Mac users, you can install dependencies using Homebrew
 
-**brew install node**
+`brew install node`
 
-**brew install mariadb**
+`brew install mariadb`
 
-Setting up the database (same used in mouseinventory respository)
+####Setting up the database####
+
+_Using same db as mouseinventory respository_
 
 The following matches local database used in backend> config> database.js
 
 _If installed mariadb using brew_
 
-% brew services start mariadb
+`brew services start mariadb`
 
-% sudo mariadb -u root
+`sudo mariadb -u root`
 
 Password: (computer system password)
 
