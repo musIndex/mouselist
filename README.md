@@ -105,7 +105,7 @@ View in a browser at http://localhost:3000
 
 >npm run build
 
->vue-cli-service: command not found
+>>vue-cli-service: command not found
 
 ### Use
 **npm install -g @vue/cli**
@@ -114,4 +114,5 @@ View in a browser at http://localhost:3000
 
 **npm install**
 
+_Updated 2/23/2023_
 

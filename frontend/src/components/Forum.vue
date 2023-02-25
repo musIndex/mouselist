@@ -223,6 +223,8 @@
         </div>
       <Calendar
         v-model="forumPost.needed"
+        :minDate="minDate"
+        :disabledDates="invalidDate"
         dateFormat="mm-dd-yy"
         id="date"
         placeholder="Select Date Needed"
@@ -269,20 +271,11 @@ export default {
     let today = new Date();
     let month = today.getMonth();
     let year = today.getFullYear();
-    let prevMonth = month === 0 ? 11 : month - 1;
-    let prevYear = prevMonth === 11 ? year - 1 : year;
     let nextMonth = month === 11 ? 0 : month + 1;
     let nextYear = nextMonth === 0 ? year + 1 : year;
-    this.minDate = new Date();
-    this.minDate.setMonth(prevMonth);
-    this.minDate.setFullYear(prevYear);
     this.maxDate = new Date();
     this.maxDate.setMonth(nextMonth);
     this.maxDate.setFullYear(nextYear);
-
-    let invalidDate = new Date();
-    invalidDate.setDate(today.getDate() - 1);
-    this.invalidDates = [today, invalidDate];
   },
   setup() {
     const baseURL = `${window.location.protocol}//${window.location.host}`;
@@ -304,7 +297,6 @@ export default {
     const forum = ref();
     const forumPost = ref({});
     const loading = ref();
-    //const dt = ref();
     const needed = ref();
     const toast = useToast();
     const filters1 = ref({
@@ -312,7 +304,6 @@ export default {
     });
     const submitted = ref(false);
 
-    //const forumTable = ref(new ForumTable());
     const forumDialog = ref(false);
 
     const actions = ref();
@@ -363,7 +354,7 @@ export default {
         } catch (error) {
           console.log(error);
         }
-        //forum.value.push(forumPost.value);
+      
         try {
         loading.value = true;  
         const { data } = await axios.get(`${baseURL}/api/forum`);
@@ -391,6 +382,14 @@ export default {
     const details = ref("<div>Add Mouse Details</div>");
     const calendar = ref();
     const postComponent = ref(null);
+    
+    const minDate = ref(new Date());
+    const invalidDate = ref();
+    let dDate = new Date();
+    let today = new Date();
+        dDate.setDate(today.getDate() - 1);
+        invalidDate.value = [today, dDate];
+   
 
     return {
       loading, 
@@ -403,6 +402,8 @@ export default {
       forumDialog,
       actions,
       calendar,
+      invalidDate,
+      minDate,
       savePosting,
       choices,
       details,
