@@ -70,49 +70,50 @@ Add the following fields using VARCHAR type
 |user_email |user_comment |posted |post_id |links |mouse |email
 |--         |-------------|-------|--------|------|------|------
 
-To run the application locally from the backend directory in the terminal
 
-cd backend
+## To run the application locally from the backend directory in the terminal
 
-node index.js
+`cd backend`
+
+`node index.js`
 
 View in a browser at http://localhost:3000
 
 ## _Troubleshooting Errors_
 
 
-### When serving app
+### _When serving app_
 
->cd backend
+`cd backend`
 
->node index.js
+`node index.js`
 
->>Cannot find package 'cors’ error
-
-### Use
-**npm install cors**
-
-
->>API key does not start with "SG
+>Cannot find package 'cors’ error
 
 ### Use
+`npm install cors`
 
-**echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env && echo "sendgrid.env" >> .gitignore && source ./sendgrid.env**
+>API key does not start with "SG
+
+### Use
+
+`echo "export SENDGRID_API_KEY='YOUR_API_KEY'" > sendgrid.env && echo "sendgrid.env" >> .gitignore && source ./sendgrid.env`
 
 ### When building frontend
 
->cd frontend
+`cd frontend`
 
->npm run build
+`npm run build`
 
->>vue-cli-service: command not found
+>vue-cli-service: command not found
 
 ### Use
-**npm install -g @vue/cli**
 
-**npm install -g @vue/cli-service**
+`npm install -g @vue/cli**`
 
-**npm install**
+`npm install -g @vue/cli-service`
+
+`npm install`
 
 _Updated 2/23/2023_
 
