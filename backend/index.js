@@ -39,6 +39,6 @@ app.get('/', function (req,res) {
 
  // use router
  app.use(Router);
-
+//Change process.env for vite
 const port = process.env.PORT || 3000;
 app.listen( port, () => console.log(`Server running at port ${port}`));

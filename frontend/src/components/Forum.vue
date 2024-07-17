@@ -3,7 +3,7 @@
 <router-view />
   <div class="card">
     <Toolbar class="p-mb-4">
-      <template #left>
+      <template #start>
         <Button
           label="New Post"
           icon="pi pi-plus"

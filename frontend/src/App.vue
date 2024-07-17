@@ -1,21 +1,21 @@
 <template>
   <div id="app" class="container is-max-desktop">
      <Toolbar class="ucsf-toolbar" style="background-color:#052049; padding-left:105px; padding-right:105px; padding-top:7px !important; padding-bottom:7px !important; " >
-      <template #left >
+      <template #start >
          <img src='./assets/UCSF_Logo_21_White_300dpi_RGB.png' class= "ucsf-logo">
          <button class="ucsf-header" style="padding-left:15px" @click="redirect('http://www.ucsf.edu')">University of California San Francisco</button>
         </template>
-        <template #right>
+        <template #end>
           <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/about')">About UCSF</button>
           <button class="ucsf-header" @click="redirect('http://www.ucsf.edu/search')" title="">Search UCSF</button>
           <button class="ucsf-header" @click="redirect('http://www.ucsfhealth.org/')">UCSF Health</button>
         </template>
     </Toolbar>
     <Toolbar class="ucsf-toolbar" style="height:120px; border:none; background-color:#FFF;">
-      <template #left >
+      <template #start >
          <h2 style="font-family:Arial; font-size:26px; color:#052049">UCSF Mouselist</h2>
         </template>
-        <template #right>
+        <template #end>
           <button class="ucsf-nav" @click="openAbout()">About</button>
           <button class="ucsf-nav" @click="redirect('http://mousedatabase.ucsf.edu')">Mouse Inventory</button>
           <button class="ucsf-nav" @click="redirect('https://larc.ucsf.edu')" >LARC</button>
@@ -68,10 +68,10 @@
           </router-link>
     <router-view />
      <Toolbar style="background-color:#052049; padding-top:0px !important; padding-bottom:0px !important;" >
-      <template #left>
+      <template #start>
          <p style="color:#FFF;  font-size: 14px">© 2021 The Regents of the University of California</p>
         </template>
-        <template #right>
+        <template #end>
           <button class="ucsf-header" @click="redirect('mailto:admin.mousedatabase@ucsf.edu')">Contact Us</button>
           <button class="ucsf-header" @click="redirect('https://websites.ucsf.edu/digital-accessibility')">Accessibility</button>
           <button class="ucsf-header" @click="redirect('https://www.ucsf.edu/website-privacy-policy')">Privacy Policy</button>
