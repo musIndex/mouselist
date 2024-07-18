@@ -65,7 +65,7 @@
 </div>
 </template>
 <script>
-import { ref, watch, onMounted} from "vue";
+import { ref, watch, onMounted, reactive} from "vue";
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
 import axios from "axios";
@@ -91,13 +91,23 @@ export default {
     const comment = ref();
     const loading = ref(true);
 
- watch(
-      () => route.params.id, 
-      async (newId) => { 
-      await getComments(newId);
+    // Define a reactive state that includes both the id and a manual trigger
+    const state = reactive({
+      id: null,
+      trigger: 0, // You can increment this to force the watch callback to run
+    });
+
+    // Watch both the route's id and the manual trigger
+    watch(
+      [() => route.params.id, () => state.trigger],
+      async ([newId], [oldId]) => {
+        if (newId !== oldId || state.trigger > 0) {
+          await getComments(newId);
+        }
       }
     );
-  
+   
+
     const getComments = (async (id) => {
       try {
         const { data } = await axios.get(`${baseURL}/api/posts/`+id);
@@ -114,16 +124,24 @@ export default {
   
     const toggle = (event, id) => {
         commentPanel.value.toggle(event);
+        state.id = id; // Update the reactive state
         getComments(id);
         console.log("got toggle");
+        forceUpdateComments();//Github copilot didn't add, need to call
         };
+
+     // Function to manually trigger the watch callback
+    const forceUpdateComments = () => {
+      state.trigger++; // Increment the trigger to force the watch callback
+    };
+
     return {
       comment,
       commentPanel,
       loading,
       toggle,
-      getComments
-    
+      getComments,
+      forceUpdateComments, // Expose the function so it can be used in the template
     };
   },
 };
