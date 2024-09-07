@@ -1,39 +1,31 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const host = process.env.DB_HOST || 'localhost';
-const database = process.env.DB_NAME || 'mouse_inventory';
-const user = process.env.DB_USER || 'mouseuser';
-const password = process.env.DB_PASSWORD || 'password';
-const mariadb = require('mariadb');
+import mysql from 'mysql2/promise';
 
-//localhost
+const host1 = process.env.DB_HOST || 'localhost';
+const port1 = process.env.DB_PORT || 3306;
+const database1 = process.env.DB_NAME || 'mouse_inventory';
+const user1 = process.env.DB_USER || 'admin';
+const password1 = process.env.DB_PASSWORD || 'password';
 
-const pool = mariadb.createPool({
-     
-     host, 
-     database,
-     user, 
-     password,
-     connectionLimit: 5
-     }  
-
-);
-
-/*
-const pool = mariadb.createPool({
-     host: 'process.env.DB_HOST', 
-     database:'process.env.DB_NAME',
-     user: 'process.env.DB_USER', 
-     password: 'process.env.DB_PASSWORD',
-     connectionLimit: 5 });
-*/
-pool.getConnection()
-    .then(conn => {
-      console.log("connected ! connection id is " + conn.threadId);
-      conn.release(); //release to pool
-    })
-    .catch(err => {
-      console.log("not connected due to error: " + err);
-    });
+const pool = mysql.createPool({
+    host : host1 ,
+    user: user1,
+    database: database1,
+    port: port1,
+    password: password1,
+    ssl: { rejectUnauthorized: true, ca: Buffer.from(process.env.SSL_CERT, "base64").toString("ascii") },
+    connectionLimit: 5,
+    waitForConnections: true
+  });
   
+  pool.getConnection()
+  .then(conn => {
+    console.log("connected! connection id is " + conn.threadId);
+    conn.release(); // release to pool
+  })
+  .catch(err => {
+    console.log("not connected due to error: " + err);
+  });
+  
+
 export default pool;
+

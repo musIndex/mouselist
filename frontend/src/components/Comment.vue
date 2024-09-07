@@ -55,8 +55,8 @@
  
 </template>
 
-<script>
-import { ref, watch } from "vue";
+<script setup>
+import { ref, watch, defineProps } from "vue";
 
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
@@ -64,27 +64,31 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import { useRoute } from 'vue-router';
 
-export default {
-  props: ['mouse', 'id', 'email'],
-  setup() {
-    const route = useRoute();
-    const forumComment = ref({});
-    const router = useRouter();
-    const submitted = ref(false);
-    const commentDialog = ref(true);
+defineProps({
+  mouse: String,
+  id: String,
+  email: String
+});
+//const props = defineProps( ['mouse', 'id', 'email'])
+    //const mouseName = ref(props.mouse)
+    const route = useRoute()
+    const forumComment = ref({})
+    const router = useRouter()
+    const submitted = ref(false)
+    const commentDialog = ref(true)
     
      watch(
       () => route.params.id,
       async newId => {
         commentDialog.value.post_id = await showDialog(newId)
       }
-    )
+    );
     var currentDate = new Date();
     var fixedDate = currentDate.toDateString();
     const showDialog = (id) =>{
         commentDialog.value = true;
         forumComment.value.post_id =id;
-    }
+    };
     const hideDialog = () => {
             commentDialog.value = false;
             submitted.value = false;
@@ -109,21 +113,10 @@ export default {
             console.log(error);
           }
         );
-      }
-
       //commentDialog.value = false;
       forumComment.value = {};
       submitted.value = false;
+    }
     };
 
-    return {
-      submitted,
-      forumComment,
-      commentDialog,
-      hideDialog,
-      saveComment,
-      showDialog,
-    };
-  },
-};
 </script>

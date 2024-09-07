@@ -64,17 +64,17 @@
   
 </div>
 </template>
-<script>
+<script setup>
 import { ref, watch, onMounted, reactive} from "vue";
 import "primeflex/primeflex.css";
 //import { useToast } from 'primevue/usetoast';
 import axios from "axios";
 import { useRoute } from "vue-router";
 
-export default {
-  props: ["mouse", "id"],
-  setup() {
-    const baseURL = `${window.location.protocol}//${window.location.host}`;
+
+props: ["mouse", "id"]
+ 
+const baseURL = `${window.location.protocol}//${window.location.host}`;
     onMounted(async (id) => {
       try {
         const { data } = await axios.get(baseURL+"/api/posts/"+id);
@@ -135,14 +135,4 @@ export default {
       state.trigger++; // Increment the trigger to force the watch callback
     };
 
-    return {
-      comment,
-      commentPanel,
-      loading,
-      toggle,
-      getComments,
-      forceUpdateComments, // Expose the function so it can be used in the template
-    };
-  },
-};
 </script>

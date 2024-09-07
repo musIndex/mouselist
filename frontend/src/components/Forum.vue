@@ -252,7 +252,7 @@
   </Dialog>
   </div>
 </template>
-<script>
+<script setup>
 import { ref, onBeforeMount} from "vue";
 import axios from "axios";
 import { FilterMatchMode } from "primevue/api";
@@ -261,23 +261,6 @@ import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
 import CommentPosts from "../components/Posts.vue"
 
-
-export default {
- name: "Forum",
-  components: {
-    CommentPosts,
-  },
-  created(){
-    let today = new Date();
-    let month = today.getMonth();
-    let year = today.getFullYear();
-    let nextMonth = month === 11 ? 0 : month + 1;
-    let nextYear = nextMonth === 0 ? year + 1 : year;
-    this.maxDate = new Date();
-    this.maxDate.setMonth(nextMonth);
-    this.maxDate.setFullYear(nextYear);
-  },
-  setup() {
     const baseURL = `${window.location.protocol}//${window.location.host}`;
     onBeforeMount(async() => {
       try {
@@ -323,9 +306,7 @@ export default {
       router.push("/api");
       
       console.log(window.location.host);
-    }
-    
-    
+    };
     
     const choices = ref([
       { name: "Purchase", code: "Purchase" },
@@ -391,27 +372,4 @@ export default {
         invalidDate.value = [today, dDate];
    
 
-    return {
-      loading, 
-      openNew,
-      needed,
-      hideDialog,
-      submitted,
-      forumPost,
-      forum,
-      forumDialog,
-      actions,
-      calendar,
-      invalidDate,
-      minDate,
-      savePosting,
-      choices,
-      details,
-      filters1,
-      postComponent,
-      refreshPosts
-      
-    };
-  },
-};
 </script>

@@ -82,12 +82,10 @@
   </div>
 </template>
  
-<script>
+<script setup>
 import { ref } from 'vue';
-export default {
-  name: "App",
 
-   setup() {
+  name: "App"
      const aboutDialog = ref(false);
      const redirect = (link) =>{
        let target = 'blank';
@@ -98,9 +96,7 @@ export default {
          const openAbout = () => {
             aboutDialog.value = true;
          };
-   return {aboutDialog, openAbout, redirect};
-  },
-};
+  
 </script>
 
 <style >

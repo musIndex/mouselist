@@ -11,6 +11,7 @@ const router = express.Router();
 // Get All forum posts
 router.get('/api/forum', showForumPost);
 
+
 // Get comment posts for specific forum post
 router.get('/api/posts/:id', showCommentPost);
 

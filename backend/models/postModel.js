@@ -4,8 +4,10 @@ import pool from "../config/database.js";
 // Get All Forum posts
 export const getForumList = async (result) => {
     try {
-        const queryResults = await pool.query("SELECT * FROM forum");
-        result(null, queryResults);
+         const queryResults = await pool.query('SELECT * from forum');
+         //result(null, queryResults);
+         result(null, queryResults[0]);
+    
     }
     catch (error) {
         console.log(error);
@@ -19,8 +21,8 @@ export const getCommentList = async (id, result) => {
     try {
         const queryResults = await pool.query("SELECT * FROM comment WHERE post_id = ?", [id]);
         console.log(id, "got comment list");
-        console.log(queryResults);
-        result(null, queryResults);
+        console.log(queryResults[0]);
+        result(null, queryResults[0]);
     }
     catch (error) {
         console.log(error);

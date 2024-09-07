@@ -9,6 +9,7 @@ export const showForumPost = (req, res) => {
             res.send(err);
         }else{
             res.json(results);
+            
         }
     });
 }

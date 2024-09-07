@@ -14,7 +14,7 @@ const routes = [
       path: '/api/comment/:id',
       name: 'Comment',
       component: Comment,
-      props: true
+      props: route => ({ mouse: route.params.mouse, id: route.params.id, email: route.params.email })
     },
     {
       path: '/api/posts/:id',
